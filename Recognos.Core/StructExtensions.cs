@@ -6,19 +6,8 @@
     /// <summary>
     /// Extension methods for object type
     /// </summary>
-    public static class ObjectExtensions
+    public static class StructExtensions
     {
-        /// <summary>
-        /// Converts an instance of an object to an enumerable containing that object.
-        /// </summary>
-        /// <typeparam name="T">Type of the object</typeparam>
-        /// <param name="instance">The instance.</param>
-        /// <returns>Enumerable containing the object.</returns>
-        public static IEnumerable<T> AsEnumerable<T>(this T instance)
-        {
-            yield return instance;
-        }
-
         /// <summary>
         /// Determines whether the specified value is the default value for the type.
         /// </summary>

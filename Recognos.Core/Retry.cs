@@ -13,6 +13,7 @@
         /// </summary>
         /// <param name="action">The action.</param>
         /// <param name="count">The count.</param>
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The languages we target support optional parameters")]
         public static void RunWithRetry(Action action, int count = 3)
         {
             RunWithRetry<Exception>(action, count);
@@ -25,6 +26,7 @@
         /// <param name="action">The action.</param>
         /// <param name="count">The count.</param>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The interface is very clear this way.")]
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The languages we target support optional parameters")]
         public static void RunWithRetry<TException>(Action action, int count = 3)
              where TException : Exception
         {
@@ -104,6 +106,7 @@
         /// <param name="action">The action.</param>
         /// <param name="count">The count.</param>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The interface is very clear this way.")]
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The languages we target support optional parameters")]
         public static T RunWithRetry<TException, T>(Func<T> action, int count = 3)
             where TException : Exception
         {

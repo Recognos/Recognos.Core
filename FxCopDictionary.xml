@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<Dictionary>
+  <Words>
+    <Recognized>
+      <Word>Recognos</Word>
+      <Word>Wordnet</Word>
+      <Word>wordnet</Word>
+      <Word>WCF</Word>
+      <Word>IOC</Word>
+      <Word>Mvc</Word>
+      <Word>Hexa</Word>
+      <Word>Behaviour</Word>
+      <Word>Gzip</Word>
+      <Word>Levenshtein</Word>
+      <Word>Codecs</Word>
+    </Recognized>
+    <Unrecognized />
+    <Deprecated />
+    <Compound />
+    <DiscreteExceptions />
+  </Words>
+  <Acronyms>
+    <CasingExceptions />
+  </Acronyms>
+</Dictionary>

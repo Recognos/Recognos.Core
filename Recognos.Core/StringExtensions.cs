@@ -248,8 +248,6 @@
                 return tagsExpression.Replace(source, string.Empty);
             }
 
-            StringBuilder builder = new StringBuilder(source);
-
             return tagsExpression.Matches(source).Cast<Match>()
                 .Select(m => m.Value).Distinct()
                 .Aggregate(new StringBuilder(source), (b, s) => b.Replace(s, new string(' ', s.Length)))
@@ -302,7 +300,7 @@
         [DebuggerStepThrough]
         public static string Join(this IEnumerable<string> collection, string separator, string emptyValue)
         {
-            if ( collection == null || !collection.Any())
+            if (collection == null || !collection.Any())
             {
                 return emptyValue;
             }

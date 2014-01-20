@@ -91,7 +91,9 @@
             }
 
             autoEvent.Close();
+            autoEvent.Dispose();
             manualEvent.Close();
+            autoEvent.Dispose();
             disposed = true;
             GC.SuppressFinalize(this);
         }

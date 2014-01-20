@@ -22,8 +22,8 @@
         /// <summary>
         /// Event used to signal the workers
         /// </summary>
-        private ResetEvent waitEvent = new ResetEvent();            
- 
+        private ResetEvent waitEvent = new ResetEvent();
+
         /// <summary>
         /// Wait event used to wait when flushing tasks
         /// </summary>
@@ -119,7 +119,7 @@
         }
 
         #region Events and properties
-        
+
         /// <summary>
         /// Event witch will be raised if a task throws an exception
         /// </summary>
@@ -148,7 +148,7 @@
                 return System.Environment.ProcessorCount;
             }
         }
-        
+
         /// <summary>
         /// Gets the number of workers
         /// </summary>
@@ -161,8 +161,8 @@
         {
             get
             {
-                return errorCount > 0; 
-            } 
+                return errorCount > 0;
+            }
         }
 
         /// <summary>
@@ -182,8 +182,8 @@
         public int TotalAddedTasks
         {
             get
-            { 
-                return addedTasksCount; 
+            {
+                return addedTasksCount;
             }
         }
 
@@ -256,7 +256,7 @@
             // wake up one sleeping worker
             waitEvent.WakeOne();
         }
-        
+
         /// <summary>
         /// Wait for all currenty added tasks to finish executing and continue waiting for tasks
         /// </summary>
@@ -291,7 +291,7 @@
 
             // signal the finished event
             finished = true;
-            
+
             waitEvent.WakeAll();
 
             foreach (Thread worker in workers)
@@ -301,7 +301,7 @@
 
             List<TaskErrorEventArgs> finalErrors = new List<TaskErrorEventArgs>();
             TaskErrorEventArgs err = null;
-            
+
             while (errors.TryDequeue(out err))
             {
                 if (OnTaskError != null)
@@ -314,13 +314,13 @@
                     finalErrors.Add(err);
                 }
             }
-            
+
             if (finalErrors.Count > 0)
             {
                 throw new ParallelExecutionException(finalErrors);
             }
         }
-        
+
         /// <summary>
         /// Ensure the wait handles are closed
         /// </summary>
@@ -334,6 +334,7 @@
             Finish();
             waitEvent.Dispose();
             flushEvent.Close();
+            flushEvent.Dispose();
             GC.SuppressFinalize(this);
             disposed = true;
         }
@@ -351,7 +352,7 @@
 
                 // we are idle but are not finished 
                 if (!finished)
-                {                    
+                {
                     // signal the flushing event
                     flushEvent.Set();
 

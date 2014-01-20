@@ -9,25 +9,11 @@
     public static class Retry
     {
         /// <summary>
-        /// Default retry count
-        /// </summary>
-        public const int DefaultRetryCount = 3;
-
-        /// <summary>
-        /// Runs an action and retries the task if an exception occurs.
-        /// </summary>
-        /// <param name="action">The action.</param>
-        public static void RunWithRetry(Action action)
-        {
-            RunWithRetry<Exception>(action, DefaultRetryCount);
-        }
-
-        /// <summary>
         /// Runs an action and retries the task if an exception occurs.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <param name="count">The count.</param>
-        public static void RunWithRetry(Action action, int count)
+        public static void RunWithRetry(Action action, int count = 3)
         {
             RunWithRetry<Exception>(action, count);
         }
@@ -37,21 +23,9 @@
         /// </summary>
         /// <typeparam name="TException">The type of the exception.</typeparam>
         /// <param name="action">The action.</param>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The interface is very clear this way.")]
-        public static void RunWithRetry<TException>(Action action)
-             where TException : Exception
-        {
-            RunWithRetry<TException>(action, DefaultRetryCount);
-        }
-
-        /// <summary>
-        /// Runs an action and retries the task if an exception occurs.
-        /// </summary>
-        /// <typeparam name="TException">The type of the exception.</typeparam>
-        /// <param name="action">The action.</param>
         /// <param name="count">The count.</param>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The interface is very clear this way.")]
-        public static void RunWithRetry<TException>(Action action, int count)
+        public static void RunWithRetry<TException>(Action action, int count = 3)
              where TException : Exception
         {
             RunWithRetry<TException>(action, count, (_, __) => { });
@@ -130,23 +104,10 @@
         /// <param name="action">The action.</param>
         /// <param name="count">The count.</param>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The interface is very clear this way.")]
-        public static T RunWithRetry<TException, T>(Func<T> action, int count)
+        public static T RunWithRetry<TException, T>(Func<T> action, int count = 3)
             where TException : Exception
         {
             return RunWithRetry<TException, T>(action, count, (_, __) => { });
-        }
-
-        /// <summary>
-        /// Runs an action and retries the task if an exception occurs.
-        /// </summary>
-        /// <typeparam name="TException">The type of the exception.</typeparam>
-        /// <typeparam name="T">Type returned by the action</typeparam>
-        /// <param name="action">The action.</param>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The interface is very clear this way.")]
-        public static T RunWithRetry<TException, T>(Func<T> action)
-            where TException : Exception
-        {
-            return RunWithRetry<TException, T>(action, DefaultRetryCount, (_, __) => { });
         }
     }
 }

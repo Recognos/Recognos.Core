@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading;
 using FluentAssertions;
-using Recognos.Core.Threading;
+using Recognos.Core;
 using Xunit;
 
 namespace Recognos.Test.Core

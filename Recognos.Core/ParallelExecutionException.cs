@@ -1,4 +1,4 @@
-﻿namespace Recognos.Core.Threading
+﻿namespace Recognos.Core
 {
     using System;
     using System.Collections.Generic;

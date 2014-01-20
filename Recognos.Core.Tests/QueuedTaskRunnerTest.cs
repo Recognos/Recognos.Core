@@ -2,10 +2,9 @@
 using System.Linq;
 using FluentAssertions;
 using Recognos.Core;
-using Recognos.Core.Threading;
 using Xunit;
 
-namespace Recognos.Test.Core.Threading
+namespace Recognos.Test.Core
 {
     /// <summary>
     /// Summary description for QueuedTaskTunnerTest
@@ -73,7 +72,7 @@ namespace Recognos.Test.Core.Threading
                         args.WasHandled = true;
                     };
 
-                Enumerable.Range(0,5).ToList().ForEach( n => runner.AddTask(action));
+                Enumerable.Range(0, 5).ToList().ForEach(n => runner.AddTask(action));
                 runner.Finish();
                 runner.HasErrors.Should().BeTrue();
             }

@@ -5,6 +5,7 @@
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
+    using System.Linq;
     using System.Threading;
 
     /// <summary>
@@ -317,7 +318,7 @@
 
             if (finalErrors.Count > 0)
             {
-                throw new ParallelExecutionException(finalErrors);
+                throw new AggregateException(finalErrors.Select(e => e.TaskException));
             }
         }
 

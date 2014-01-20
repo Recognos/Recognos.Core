@@ -194,18 +194,18 @@ namespace Recognos.Test.Core
 
                 runner.AddTask(() => { throw x; });
 
-                ParallelExecutionException pex = null;
+                AggregateException pex = null;
 
                 try
                 {
                     runner.Finish();
                 }
-                catch (ParallelExecutionException ex)
+                catch (AggregateException ex)
                 {
                     pex = ex;
                 }
-                pex.Errors.Single().WasHandled.Should().BeFalse();
-                x.Should().Be(pex.Errors.Single().TaskException);
+
+                pex.InnerExceptions.Single().Should().Be(x);
             }
         }
 

@@ -103,6 +103,12 @@ namespace Recognos.Test.Core
             uri.ResolveRedirects().Should().Be(expected);
         }
 
+        [Fact]
+        public void UriExtensions_ResolveRedirects_TinyUrl()
+        {
+            Uri uri = new Uri("http://tinyurl.com/3lesxnx");
+            uri.ResolveRedirects().Should().Be(new Uri("http://edition.cnn.com/2011/WORLD/europe/07/18/uk.committee.hearing/"));
+        }
 
     }
 

@@ -51,6 +51,7 @@
     <Compile Include="CheckTest.cs" />
     <Compile Include="DataExtensionsTest.cs" />
     <Compile Include="ParalelTaskRunnerTest.cs" />
+    <Compile Include="PBKDF2SaltedHashTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryExtentionsTests.cs" />
     <Compile Include="QueuedTaskRunnerTest.cs" />

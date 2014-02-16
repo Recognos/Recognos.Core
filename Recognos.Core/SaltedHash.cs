@@ -7,7 +7,7 @@
     /// <summary>
     /// Implementation for hashing a salted password and verifying the hash.
     /// </summary>
-    public class SaltedHash
+    public sealed class SaltedHash
     {
         /// <summary>
         /// The hash algorithm implementation to use.
@@ -52,7 +52,7 @@
         /// <returns>The hash.s</returns>
         public static string Generate(string password)
         {
-            return new SaltedHash().GenerateHash(password);
+            return PBKDF2SaltedHash.GenerateHash(password);
         }
 
         /// <summary>
@@ -63,6 +63,11 @@
         /// <returns>True if the hash matches the hashed password.</returns>
         public static bool Verify(string password, string hash)
         {
+            if (PBKDF2SaltedHash.IsPBKDF2Hash(hash))
+            {
+                return PBKDF2SaltedHash.VerifyHash(password, hash);
+            }
+
             return new SaltedHash().VerifyHash(password, hash);
         }
 
@@ -71,6 +76,7 @@
         /// </summary>
         /// <param name="password">The password.</param>
         /// <returns>The hash.s</returns>
+        [Obsolete("New hashes should be generated using PBKDF2SaltedHash.GenerateHash()")]
         public string GenerateHash(string password)
         {
             Check.NotNull(password, "password");
@@ -90,6 +96,11 @@
         {
             Check.NotNull(password, "password");
             Check.NotEmpty(hash, "hash");
+
+            if (PBKDF2SaltedHash.IsPBKDF2Hash(hash))
+            {
+                return PBKDF2SaltedHash.VerifyHash(password, hash);
+            }
 
             byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
             byte[] hashAndSaltBytes = Convert.FromBase64String(hash);

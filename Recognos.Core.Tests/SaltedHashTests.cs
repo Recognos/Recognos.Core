@@ -1,9 +1,10 @@
-﻿using FluentAssertions;using Xunit;
+﻿using FluentAssertions;
 using Recognos.Core;
+using Xunit;
 
 namespace Recognos.Test.Core
 {
-    
+
     public class SaltedHashTests
     {
         private string password = "test";
@@ -13,16 +14,14 @@ namespace Recognos.Test.Core
         [Fact]
         public void SaltedHash_CanCreateHash()
         {
-            SaltedHash hash = new SaltedHash();
-            string hashed = hash.GenerateHash(password);
-            hashed.Should().NotBeEmpty();
+            SaltedHash.Generate(password).Should().NotBeEmpty();
         }
 
         [Fact]
         public void SaltedHash_CanVerifyCreatedHash()
         {
             SaltedHash hash = new SaltedHash();
-            string hashed = hash.GenerateHash(password);
+            string hashed = SaltedHash.Generate(password);
 
             bool result = hash.VerifyHash(password, hashed);
 
@@ -33,7 +32,7 @@ namespace Recognos.Test.Core
         public void SaltedHash_CanVerifyBadPass()
         {
             SaltedHash hash = new SaltedHash();
-            string hashed = hash.GenerateHash(good);
+            string hashed = SaltedHash.Generate(good);
 
             bool result = hash.VerifyHash(bad, hashed);
 

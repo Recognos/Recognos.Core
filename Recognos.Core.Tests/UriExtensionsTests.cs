@@ -54,15 +54,6 @@ namespace Recognos.Test.Core
         }
 
         [Fact]
-        public void UriExtensions_ResolveRedirects()
-        {
-            Uri uri = new Uri("http://bit.ly/pZJR0s");
-            Uri expected = new Uri("http://www.erata.net");
-
-            uri.ResolveRedirects().Should().Be(expected);
-        }
-
-        [Fact]
         public void UriExtensions_ResolveRedirects_Facebook()
         {
             Uri uri = new Uri("http://t.co/6VyBZOO");

@@ -66,6 +66,7 @@
     <Compile Include="Format.cs" />
     <Compile Include="CollectionsExtensions.cs" />
     <Compile Include="PBKDF2SaltedHash.cs" />
+    <Compile Include="ReferencedAssemblyLoader.cs" />
     <Compile Include="StructExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryExtensions.cs" />

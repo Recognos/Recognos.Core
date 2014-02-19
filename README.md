@@ -10,9 +10,10 @@ Note
 
 The authors of this library encourage the use of classes & primitives from the .NET Framework over classes in this library. 
 
-It is also encouraged that you favor unit tests, instead of relying on the Check helpers as defensive programming.
+It is also encouraged that you favour unit tests, instead of relying on the Check helpers as defensive programming.
 
 ChangeLog
 ---------
 
-2.0.3 - added implemntation for PBKDF2 salted hash
+2.0.4 - added helper class ReferencedAssemblyLoader: utility to ensure all referenced assemblies are loaded
+2.0.3 - added implementation for PBKDF2 salted hash

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recognos.Core", "Recognos.Core\Recognos.Core.csproj", "{6F815C90-701F-42DD-AED8-14FF9D493428}"
 EndProject
@@ -15,7 +15,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{11673A95-2956-418C-9AFB-E81DA2380AA1}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
-		Recognos.Core\Recognos.Core.nuspec = Recognos.Core\Recognos.Core.nuspec
+		Recognos.Core.nuspec = Recognos.Core.nuspec
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recognos.Core.Tests", "Recognos.Core.Tests\Recognos.Core.Tests.csproj", "{6F08D87C-ECB4-425A-AA53-8E9B14A079B9}"

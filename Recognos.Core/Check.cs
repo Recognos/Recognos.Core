@@ -117,7 +117,7 @@
         [DebuggerStepThrough]
         public static void Positive(long value, string name)
         {
-            if (value < 0)
+            if (value < 0L)
             {
                 throw new ArgumentException("Argument must be positive", name);
             }
@@ -131,7 +131,35 @@
         [DebuggerStepThrough]
         public static void Positive(decimal value, string name)
         {
-            if (value < 0)
+            if (value < 0m)
+            {
+                throw new ArgumentException("Argument must be positive", name);
+            }
+        }
+
+        /// <summary>
+        /// verify that argument is >= 0
+        /// </summary>
+        /// <param name="value">value to check</param>
+        /// <param name="name">Original name of the argument</param>
+        [DebuggerStepThrough]
+        public static void Positive(float value, string name)
+        {
+            if (value < 0f)
+            {
+                throw new ArgumentException("Argument must be positive", name);
+            }
+        }
+
+        /// <summary>
+        /// verify that argument is >= 0
+        /// </summary>
+        /// <param name="value">value to check</param>
+        /// <param name="name">Original name of the argument</param>
+        [DebuggerStepThrough]
+        public static void Positive(double value, string name)
+        {
+            if (value < 0d)
             {
                 throw new ArgumentException("Argument must be positive", name);
             }
@@ -159,7 +187,7 @@
         [DebuggerStepThrough]
         public static void AbsolutePositive(long value, string name)
         {
-            if (value <= 0)
+            if (value <= 0L)
             {
                 throw new ArgumentException("Argument must be positive", name);
             }
@@ -173,7 +201,35 @@
         [DebuggerStepThrough]
         public static void AbsolutePositive(decimal value, string name)
         {
-            if (value <= 0)
+            if (value <= 0m)
+            {
+                throw new ArgumentException("Argument must be positive", name);
+            }
+        }
+
+        /// <summary>
+        /// verify that argument is > 0
+        /// </summary>
+        /// <param name="value">value to check</param>
+        /// <param name="name">Original name of the argument</param>
+        [DebuggerStepThrough]
+        public static void AbsolutePositive(float value, string name)
+        {
+            if (value <= 0f)
+            {
+                throw new ArgumentException("Argument must be positive", name);
+            }
+        }
+
+        /// <summary>
+        /// verify that argument is > 0
+        /// </summary>
+        /// <param name="value">value to check</param>
+        /// <param name="name">Original name of the argument</param>
+        [DebuggerStepThrough]
+        public static void AbsolutePositive(double value, string name)
+        {
+            if (value <= 0d)
             {
                 throw new ArgumentException("Argument must be positive", name);
             }

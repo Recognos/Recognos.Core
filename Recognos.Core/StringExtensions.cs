@@ -33,7 +33,7 @@
         /// <summary>
         /// Regular expression to match a guid.
         /// </summary>
-        private static Regex guidExpression =
+        private static readonly Regex guidExpression =
             new Regex(GuidPattern, RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Singleline);
 
         /// <summary>
@@ -304,7 +304,6 @@
             {
                 return emptyValue;
             }
-
             return string.Join(separator, collection);
         }
 
@@ -321,7 +320,7 @@
 
             T result;
 
-            if (Enum.TryParse<T>(value, out result))
+            if (Enum.TryParse(value, out result))
             {
                 return result;
             }
@@ -354,12 +353,7 @@
         [DebuggerStepThrough]
         public static bool IsGuid(this string expression)
         {
-            if (expression != null)
-            {
-                return guidExpression.IsMatch(expression);
-            }
-
-            return false;
+            return expression != null && guidExpression.IsMatch(expression);
         }
 
         /// <summary>
@@ -385,8 +379,8 @@
                 ms.Read(compressed, 0, compressed.Length);
 
                 byte[] gzippedBuffer = new byte[compressed.Length + 4];
-                System.Buffer.BlockCopy(compressed, 0, gzippedBuffer, 4, compressed.Length);
-                System.Buffer.BlockCopy(BitConverter.GetBytes(buffer.Length), 0, gzippedBuffer, 0, 4);
+                Buffer.BlockCopy(compressed, 0, gzippedBuffer, 4, compressed.Length);
+                Buffer.BlockCopy(BitConverter.GetBytes(buffer.Length), 0, gzippedBuffer, 0, 4);
                 return Convert.ToBase64String(gzippedBuffer);
             }
         }
@@ -518,7 +512,7 @@
             while (size <= length && size < (input.Length - 1))
             {
                 lastIndex = index;
-                index = input.LastIndexOfAny(new char[] { ' ', '\n' }, index - 1);
+                index = input.LastIndexOfAny(new[] { ' ', '\n' }, index - 1);
 
                 if (index <= 0)
                 {
@@ -586,7 +580,7 @@
             while (index <= length && index <= input.Length)
             {
                 lastindex = index;
-                index = input.IndexOfAny(new char[] { ' ', '\n' }, index + 1);
+                index = input.IndexOfAny(new[] { ' ', '\n' }, index + 1);
 
                 if (index <= 0)
                 {
@@ -621,7 +615,7 @@
 
             while (count < wordCount)
             {
-                index = input.LastIndexOfAny(new char[] { ' ', '\n' }, index - 1);
+                index = input.LastIndexOfAny(new[] { ' ', '\n' }, index - 1);
                 if (index <= 0)
                 {
                     index = 0;
@@ -660,7 +654,7 @@
 
             while (count < wordCount)
             {
-                index = input.IndexOfAny(new char[] { ' ', '\n' }, index + 1);
+                index = input.IndexOfAny(new[] { ' ', '\n' }, index + 1);
                 if (index <= 0)
                 {
                     index = 0;
@@ -670,10 +664,9 @@
                 count++;
             }
 
-            int start = 0;
             int length = index > 0 ? index : input.Length;
 
-            return input.Substring(start, length);
+            return input.Substring(0, length);
         }
 
         /// <summary>
@@ -988,11 +981,7 @@
                 return 0;
             }
 
-            int cost;
             int[,] d = new int[first.Length + 1, second.Length + 1];
-            int min1;
-            int min2;
-            int min3;
 
             for (int i = 0; i <= d.GetUpperBound(0); i += 1)
             {
@@ -1008,11 +997,11 @@
             {
                 for (int j = 1; j <= d.GetUpperBound(1); j += 1)
                 {
-                    cost = Convert.ToInt32(!(first[i - 1] == second[j - 1]));
+                    var cost = Convert.ToInt32(first[i - 1] != second[j - 1]);
 
-                    min1 = d[i - 1, j] + 1;
-                    min2 = d[i, j - 1] + 1;
-                    min3 = d[i - 1, j - 1] + cost;
+                    var min1 = d[i - 1, j] + 1;
+                    var min2 = d[i, j - 1] + 1;
+                    var min3 = d[i - 1, j - 1] + cost;
                     d[i, j] = Math.Min(Math.Min(min1, min2), min3);
                 }
             }

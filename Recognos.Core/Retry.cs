@@ -30,7 +30,7 @@
         public static void RunWithRetry<TException>(Action action, int count = 3)
              where TException : Exception
         {
-            RunWithRetry<TException>(action, count, (_, __) => { });
+            RunWithRetry<TException>(action, count, null);
         }
 
         /// <summary>
@@ -57,7 +57,10 @@
                 catch (TException ex)
                 {
                     i++;
-                    error(ex, i);
+                    if (error != null)
+                    {
+                        error(ex, i);
+                    }
                     if (i == count)
                     {
                         throw;
@@ -89,7 +92,10 @@
                 catch (TException ex)
                 {
                     i++;
-                    error(ex, i);
+                    if (error != null)
+                    {
+                        error(ex, i);
+                    }
                     if (i == count)
                     {
                         throw;
@@ -110,7 +116,7 @@
         public static T RunWithRetry<TException, T>(Func<T> action, int count = 3)
             where TException : Exception
         {
-            return RunWithRetry<TException, T>(action, count, (_, __) => { });
+            return RunWithRetry<TException, T>(action, count, null);
         }
     }
 }

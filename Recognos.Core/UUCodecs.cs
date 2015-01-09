@@ -10,6 +10,7 @@
     /// This class has been taken from
     /// http://geekswithblogs.net/kobush/articles/63486.aspx
     /// </remarks>
+    // ReSharper disable once UnusedMember.Global
     public static class UUCodecs
     {
         /// <summary>
@@ -71,11 +72,11 @@
             while (nextByte >= 0)
             {
                 // get line length (in number of encoded octets)
-                int line_len = UUDecMap[nextByte];
+                int lineLen = UUDecMap[nextByte];
 
                 // ascii printable to 0-63 and 4-byte to 3-byte conversion
-                long end = didx + line_len;
-                byte a, b, c, d;
+                long end = didx + lineLen;
+                byte a, b, c;
                 if (end > 2)
                 {
                     while (didx < end - 2)
@@ -83,7 +84,7 @@
                         a = UUDecMap[input.ReadByte()];
                         b = UUDecMap[input.ReadByte()];
                         c = UUDecMap[input.ReadByte()];
-                        d = UUDecMap[input.ReadByte()];
+                        var d = UUDecMap[input.ReadByte()];
 
                         output.WriteByte((byte)(((a << 2) & 255) | ((b >> 4) & 3)));
                         output.WriteByte((byte)(((b << 4) & 255) | ((c >> 2) & 15)));
@@ -141,7 +142,7 @@
             }
 
             int sidx = 0;
-            int line_len = 45;
+            const int line_len = 45;
             byte[] nl = Encoding.ASCII.GetBytes(Environment.NewLine);
 
             byte a, b, c;

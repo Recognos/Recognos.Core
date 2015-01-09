@@ -18,27 +18,27 @@
         /// <summary>
         /// Pool of workers used
         /// </summary>
-        private Thread[] workers;
+        private readonly Thread[] workers;
 
         /// <summary>
         /// Event used to signal the workers
         /// </summary>
-        private ResetEvent waitEvent = new ResetEvent();
+        private readonly ResetEvent waitEvent = new ResetEvent();
 
         /// <summary>
         /// Wait event used to wait when flushing tasks
         /// </summary>
-        private EventWaitHandle flushEvent = new AutoResetEvent(false);
+        private readonly EventWaitHandle flushEvent = new AutoResetEvent(false);
 
         /// <summary>
         /// Queue of tasks to execute
         /// </summary>
-        private ConcurrentQueue<Action> tasks = new ConcurrentQueue<Action>();
+        private readonly ConcurrentQueue<Action> tasks = new ConcurrentQueue<Action>();
 
         /// <summary>
         /// Queue of errors produced by running the tasks
         /// </summary>
-        private ConcurrentQueue<TaskErrorEventArgs> errors = new ConcurrentQueue<TaskErrorEventArgs>();
+        private readonly ConcurrentQueue<TaskErrorEventArgs> errors = new ConcurrentQueue<TaskErrorEventArgs>();
 
         #region Fields for properties and flags
 
@@ -107,9 +107,11 @@
             workers = new Thread[WorkerCount];
             for (int i = 0; i < WorkerCount; i++)
             {
-                workers[i] = new Thread(new ThreadStart(RunWorker));
-                workers[i].IsBackground = true;
-                workers[i].Name = string.Format(CultureInfo.InvariantCulture, "{0} Worker {1}", Name, i);
+                workers[i] = new Thread(RunWorker)
+                {
+                    IsBackground = true,
+                    Name = string.Format(CultureInfo.InvariantCulture, "{0} Worker {1}", Name, i)
+                };
                 if (highPriority)
                 {
                     workers[i].Priority = ThreadPriority.AboveNormal;
@@ -146,7 +148,7 @@
         {
             get
             {
-                return System.Environment.ProcessorCount;
+                return Environment.ProcessorCount;
             }
         }
 
@@ -301,7 +303,7 @@
             }
 
             List<TaskErrorEventArgs> finalErrors = new List<TaskErrorEventArgs>();
-            TaskErrorEventArgs err = null;
+            TaskErrorEventArgs err;
 
             while (errors.TryDequeue(out err))
             {
@@ -336,7 +338,6 @@
             waitEvent.Dispose();
             flushEvent.Close();
             flushEvent.Dispose();
-            GC.SuppressFinalize(this);
             disposed = true;
         }
 

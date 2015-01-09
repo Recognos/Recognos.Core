@@ -88,7 +88,7 @@
         [DebuggerStepThrough]
         public static void NotEmpty<T>(IEnumerable<T> argument, string name)
         {
-            Check.NotNull(argument, name);
+            NotNull(argument, name);
             if (!argument.Any())
             {
                 throw new ArgumentException("Argument can't be empty", name);
@@ -244,8 +244,8 @@
         [DebuggerStepThrough]
         public static void RegexMatch(string regex, string value, string name)
         {
-            Check.NotEmpty(regex, "pattern");
-            Check.NotEmpty(value, name);
+            NotEmpty(regex, "pattern");
+            NotEmpty(value, name);
 
             if (!Regex.IsMatch(value, regex))
             {
@@ -300,12 +300,8 @@
         /// <param name="instance">The instance to check.</param>
         public static void InjectedMembers<T>(T instance)
         {
-            Check.NotNull(instance, "instance");
+            NotNull(instance, "instance");
             FieldInfo[] fields = typeof(T).GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
-            if (fields == null)
-            {
-                return;
-            }
 
             foreach (FieldInfo field in fields)
             {
@@ -315,7 +311,7 @@
                 }
 
                 object injected = field.GetValue(instance);
-                Check.Condition(injected != null, string.Format(CultureInfo.InvariantCulture, "Injected member {0} is null", field.Name));
+                Condition(injected != null, string.Format(CultureInfo.InvariantCulture, "Injected member {0} is null", field.Name));
             }
         }
 
@@ -326,8 +322,8 @@
         /// <param name="name">The name of the variable.</param>
         public static void ValidEmail(string email, string name)
         {
-            Check.NotEmpty(email, "email");
-            Check.Condition(emailRegex.IsMatch(email), "{0} is not a valid email address", name);
+            NotEmpty(email, "email");
+            Condition(emailRegex.IsMatch(email), "{0} is not a valid email address", name);
         }
     }
 }

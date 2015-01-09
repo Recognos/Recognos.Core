@@ -199,7 +199,7 @@ namespace Recognos.Test.Core
             source.CaseSensitiveContains("cde").Should().BeTrue();
             source.CaseSensitiveContains("CDE").Should().BeFalse();
         }
-        
+
         [Fact]
         public void StringExtensions_RightAtWord_NegativeLength()
         {
@@ -421,7 +421,7 @@ namespace Recognos.Test.Core
             string input = "asd dsa asd";
             IEnumerable<string> tags = new string[] { "asd", "dsa" };
 
-            var expected = new [] 
+            var expected = new[] 
             {
                 Tuple.Create(0,"asd"),
                 Tuple.Create(4,"dsa"),
@@ -445,7 +445,7 @@ namespace Recognos.Test.Core
         [Fact]
         public void StringExtensions_Join_EmptyCollection()
         {
-            string[] input = new string[] { };
+            string[] input = { };
             string empty = "empty";
 
             input.Join(",", empty).Should().Be(empty);

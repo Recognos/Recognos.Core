@@ -57,7 +57,7 @@ namespace Recognos.Test.Core
         public void UriExtensions_ResolveRedirects_Facebook()
         {
             Uri uri = new Uri("http://t.co/6VyBZOO");
-            Uri expected = new Uri("http://www.facebook.com/photo.php?pid=585685&l=588142298a&id=100399403341183");
+            Uri expected = new Uri("https://www.facebook.com/photo.php?pid=585685&l=588142298a&id=100399403341183");
 
             uri.ResolveRedirects().Should().Be(expected);
         }

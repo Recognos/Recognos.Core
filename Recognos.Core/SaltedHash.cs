@@ -1,4 +1,6 @@
-﻿namespace Recognos.Core
+﻿using System.Linq;
+
+namespace Recognos.Core
 {
     using System;
     using System.Security.Cryptography;
@@ -117,15 +119,7 @@
                 return false;
             }
 
-            for (int i = 0; i < hashBytes.Length; ++i)
-            {
-                if (hashBytes[i] != hashAndSaltBytes[i])
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return !hashBytes.Where((t, i) => t != hashAndSaltBytes[i]).Any();
         }
 
         /// <summary>

@@ -13,7 +13,7 @@
         /// <summary>
         /// Regular expression for matching uris
         /// </summary>
-        public static readonly Regex UriExpression = new Regex(@"([a-z0-9+.-]+):(?://(?:((?:[a-z0-9-._~!$&'()*+,;=:]|%[0-9A-F]{2})*)@)?((?:[a-z0-9-._~!$&'()*+,;=]|%[0-9A-F]{2})*)(?::(\d*))?(/(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?|(/?(?:[a-z0-9-._~!$&'()*+,;=:@]|%[0-9A-F]{2})+(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?)(?:\?((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?(?:#((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex uriExpression = new Regex(@"([a-z0-9+.-]+):(?://(?:((?:[a-z0-9-._~!$&'()*+,;=:]|%[0-9A-F]{2})*)@)?((?:[a-z0-9-._~!$&'()*+,;=]|%[0-9A-F]{2})*)(?::(\d*))?(/(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?|(/?(?:[a-z0-9-._~!$&'()*+,;=:@]|%[0-9A-F]{2})+(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?)(?:\?((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?(?:#((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         /// <summary>
         /// Extracts the uris from a string.
@@ -27,7 +27,7 @@
                 yield break;
             }
 
-            MatchCollection matches = UriExpression.Matches(input);
+            MatchCollection matches = uriExpression.Matches(input);
 
             foreach (Match match in matches)
             {
@@ -81,7 +81,6 @@
 
             HttpWebRequest request = WebRequest.Create(uri) as HttpWebRequest;
 
-            request.Method = WebRequestMethods.Http.Head;
 
             request.UserAgent = @"Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)";
             request.Accept = @"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";

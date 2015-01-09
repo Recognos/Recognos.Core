@@ -128,7 +128,7 @@
                 dueTime = untilTomorrow + timeToRun;
             }
 
-            timer = new Timer(new TimerCallback((o) => RunTask()), null, dueTime, interval);
+            timer = new Timer(o => RunTask(), null, dueTime, interval);
         }
 
         /// <summary>
@@ -155,7 +155,6 @@
             }
 
             Stop();
-            GC.SuppressFinalize(this);
             disposed = true;
         }
 

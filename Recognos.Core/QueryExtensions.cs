@@ -282,7 +282,7 @@
         /// <param name="sortDescriptor">The sort descriptor.</param>
         /// <returns>The new query.</returns>
         [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "The interface is clear")]
-        public static IOrderedQueryable<T> OrderBy<T, TKey>(this IQueryable<T> query, IEnumerable<Tuple<Expression<Func<T, TKey>>, ListSortDirection>> sortDescriptor)
+        public static IOrderedQueryable<T> OrderBy<T, TKey>(this IQueryable<T> query, ICollection<Tuple<Expression<Func<T, TKey>>, ListSortDirection>> sortDescriptor)
         {
             Check.NotNull(query, "query");
             Check.NotEmpty(sortDescriptor, "sortDescriptor");

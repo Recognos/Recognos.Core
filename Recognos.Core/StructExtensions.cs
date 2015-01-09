@@ -1,8 +1,5 @@
 ﻿namespace Recognos.Core
 {
-    using System;
-    using System.Collections.Generic;
-
     /// <summary>
     /// Extension methods for object type
     /// </summary>

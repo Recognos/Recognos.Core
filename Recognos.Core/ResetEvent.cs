@@ -11,17 +11,17 @@
         /// <summary>
         /// Array of handles to wait on.
         /// </summary>
-        private WaitHandle[] handles;
+        private readonly WaitHandle[] handles;
 
         /// <summary>
         /// The auto event.
         /// </summary>
-        private EventWaitHandle autoEvent;
+        private readonly EventWaitHandle autoEvent;
 
         /// <summary>
         /// The manual event.
         /// </summary>
-        private EventWaitHandle manualEvent;
+        private readonly EventWaitHandle manualEvent;
 
         /// <summary>
         /// Flag indicating that the current instance has been disposed.
@@ -95,7 +95,6 @@
             manualEvent.Close();
             autoEvent.Dispose();
             disposed = true;
-            GC.SuppressFinalize(this);
         }
     }
 }

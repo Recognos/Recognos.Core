@@ -51,7 +51,6 @@
 
             action(watch.Elapsed);
             watch.Stop();
-            GC.SuppressFinalize(this);
             disposed = true;
         }
     }

@@ -69,11 +69,10 @@ namespace Recognos.Core
             }
 
             int iterationsStart = HashPrefix.Length;
-            string iterationsString = hash.Substring(iterationsStart, hash.IndexOf(".", iterationsStart) - iterationsStart);
-            int iteations = int.Parse(iterationsString, NumberStyles.HexNumber);
+            string iterationsString = hash.Substring(iterationsStart, hash.IndexOf(".", iterationsStart, StringComparison.OrdinalIgnoreCase) - iterationsStart);
 
             int saltSizeStart = iterationsStart + iterationsString.Length + 1;
-            string saltSizeString = hash.Substring(saltSizeStart, hash.IndexOf(".", saltSizeStart) - saltSizeStart);
+            string saltSizeString = hash.Substring(saltSizeStart, hash.IndexOf(".", saltSizeStart, StringComparison.OrdinalIgnoreCase) - saltSizeStart);
             int saltSize = int.Parse(saltSizeString, NumberStyles.HexNumber);
 
             int saltStart = saltSizeStart + saltSizeString.Length + 1;

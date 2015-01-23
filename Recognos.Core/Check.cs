@@ -257,10 +257,62 @@
         /// verify that condition is true
         /// </summary>
         /// <param name="expression">Expression to check</param>
+        /// <param name="message">Message to put in exception if expression is false</param>
+        /// <param name="arg0">Argument to format message with</param>
+        /// <param name="arg1">Argument to format message with</param>
+        /// <param name="arg2">Argument to format message with</param>
         [DebuggerStepThrough]
-        public static void Condition(bool expression)
+        public static void Condition(bool expression, string message, object arg0, object arg1, object arg2)
         {
-            Condition(expression, "Expected condition failed");
+            if (!expression)
+            {
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, message, arg0, arg1, arg2));
+            }
+        }
+
+        /// <summary>
+        /// verify that condition is true
+        /// </summary>
+        /// <param name="expression">Expression to check</param>
+        /// <param name="message">Message to put in exception if expression is false</param>
+        /// <param name="arg0">Argument to format message with</param>
+        /// <param name="arg1">Argument to format message with</param>
+        [DebuggerStepThrough]
+        public static void Condition(bool expression, string message, object arg0, object arg1)
+        {
+            if (!expression)
+            {
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, message, arg0, arg1));
+            }
+        }
+
+        /// <summary>
+        /// verify that condition is true
+        /// </summary>
+        /// <param name="expression">Expression to check</param>
+        /// <param name="message">Message to put in exception if expression is false</param>
+        /// <param name="arg0">Argument to format message with</param>
+        [DebuggerStepThrough]
+        public static void Condition(bool expression, string message, object arg0)
+        {
+            if (!expression)
+            {
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, message, arg0));
+            }
+        }
+
+        /// <summary>
+        /// verify that condition is true
+        /// </summary>
+        /// <param name="expression">Expression to check</param>
+        /// <param name="message">Message to put in exception if expression is false</param>
+        [DebuggerStepThrough]
+        public static void Condition(bool expression, string message)
+        {
+            if (!expression)
+            {
+                throw new InvalidOperationException(message);
+            }
         }
 
         /// <summary>
@@ -279,7 +331,7 @@
         }
 
         /// <summary>
-        /// Determines whether intance is instance of type T.
+        /// Determines whether instance is instance of type T.
         /// </summary>
         /// <typeparam name="T">Type to check against.</typeparam>
         /// <param name="instance">The instance.</param>

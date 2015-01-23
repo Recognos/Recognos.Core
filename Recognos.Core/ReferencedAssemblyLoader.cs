@@ -22,7 +22,7 @@ namespace Recognos.Core
     /// </summary>
     public sealed class ReferencedAssemblyLoader
     {
-        private static object padlock = new object();
+        private static readonly object padlock = new object();
         private readonly Predicate<string> assemblyMatch;
         private readonly IDictionary<string, Assembly> loadedAssemblies;
 

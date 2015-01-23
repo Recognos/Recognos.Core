@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<assembly name="Recognos.Core">
+  <member name="M:Recognos.Core.Format.Invariant(System.String,System.Object[])">
+    <attribute ctor="M:JetBrains.Annotations.StringFormatMethodAttribute.#ctor(System.String)">
+      <argument>format</argument>
+    </attribute>
+  </member>
+  <member name="M:Recognos.Core.Format.Invariant(System.String,System.Object)">
+    <attribute ctor="M:JetBrains.Annotations.StringFormatMethodAttribute.#ctor(System.String)">
+      <argument>format</argument>
+    </attribute>
+  </member>
+  <member name="M:Recognos.Core.Format.Invariant(System.String,System.Object,System.Object)">
+    <attribute ctor="M:JetBrains.Annotations.StringFormatMethodAttribute.#ctor(System.String)">
+      <argument>format</argument>
+    </attribute>
+  </member>
+  <member name="M:Recognos.Core.Format.Invariant(System.String,System.Object,System.Object,System.Object)">
+    <attribute ctor="M:JetBrains.Annotations.StringFormatMethodAttribute.#ctor(System.String)">
+      <argument>format</argument>
+    </attribute>
+  </member>
+  <member name="M:Recognos.Core.Check.Condition(System.Boolean,System.String,System.Object[])">
+    <attribute ctor="M:JetBrains.Annotations.StringFormatMethodAttribute.#ctor(System.String)">
+      <argument>message</argument>
+    </attribute>
+    <attribute ctor="M:JetBrains.Annotations.AssertionMethodAttribute.#ctor"/>
+    <parameter name="expression">
+      <attribute ctor="M:JetBrains.Annotations.AssertionConditionAttribute.#ctor(JetBrains.Annotations.AssertionConditionType)">
+        <argument>JetBrains.Annotations.AssertionConditionType.IS_TRUE</argument>
+      </attribute>
+    </parameter>
+  </member>
+  <member name="M:Recognos.Core.Check.Condition(System.Boolean,System.String)">
+    <attribute ctor="M:JetBrains.Annotations.StringFormatMethodAttribute.#ctor(System.String)">
+      <argument>message</argument>
+    </attribute>
+    <attribute ctor="M:JetBrains.Annotations.AssertionMethodAttribute.#ctor"/>
+    <parameter name="expression">
+      <attribute ctor="M:JetBrains.Annotations.AssertionConditionAttribute.#ctor(JetBrains.Annotations.AssertionConditionType)">
+        <argument>JetBrains.Annotations.AssertionConditionType.IS_TRUE</argument>
+      </attribute>
+    </parameter>
+  </member>
+  <member name="M:Recognos.Core.Check.Condition(System.Boolean,System.String,System.Object)">
+    <attribute ctor="M:JetBrains.Annotations.StringFormatMethodAttribute.#ctor(System.String)">
+      <argument>message</argument>
+    </attribute>
+    <attribute ctor="M:JetBrains.Annotations.AssertionMethodAttribute.#ctor"/>
+    <parameter name="expression">
+      <attribute ctor="M:JetBrains.Annotations.AssertionConditionAttribute.#ctor(JetBrains.Annotations.AssertionConditionType)">
+        <argument>JetBrains.Annotations.AssertionConditionType.IS_TRUE</argument>
+      </attribute>
+    </parameter>
+  </member>
+  <member name="M:Recognos.Core.Check.Condition(System.Boolean,System.String,System.Object,System.Object)">
+    <attribute ctor="M:JetBrains.Annotations.StringFormatMethodAttribute.#ctor(System.String)">
+      <argument>message</argument>
+    </attribute>
+    <attribute ctor="M:JetBrains.Annotations.AssertionMethodAttribute.#ctor"/>
+    <parameter name="expression">
+      <attribute ctor="M:JetBrains.Annotations.AssertionConditionAttribute.#ctor(JetBrains.Annotations.AssertionConditionType)">
+        <argument>JetBrains.Annotations.AssertionConditionType.IS_TRUE</argument>
+      </attribute>
+    </parameter>
+  </member>
+  <member name="M:Recognos.Core.Check.Condition(System.Boolean,System.String,System.Object,System.Object,System.Object)">
+    <attribute ctor="M:JetBrains.Annotations.StringFormatMethodAttribute.#ctor(System.String)">
+      <argument>message</argument>
+    </attribute>
+    <attribute ctor="M:JetBrains.Annotations.AssertionMethodAttribute.#ctor"/>
+    <parameter name="expression">
+      <attribute ctor="M:JetBrains.Annotations.AssertionConditionAttribute.#ctor(JetBrains.Annotations.AssertionConditionType)">
+        <argument>JetBrains.Annotations.AssertionConditionType.IS_TRUE</argument>
+      </attribute>
+    </parameter>
+  </member>
+
+  <member name="M:Recognos.Core.Check.NotNull``1(``0,System.String)">
+    <attribute ctor="M:JetBrains.Annotations.AssertionMethodAttribute.#ctor"/>
+    <parameter name="argument">
+      <attribute ctor="M:JetBrains.Annotations.NoEnumerationAttribute.#ctor"/>
+      <attribute ctor="M:JetBrains.Annotations.AssertionConditionAttribute.#ctor(JetBrains.Annotations.AssertionConditionType)">
+        <argument>JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL</argument>
+      </attribute>
+    </parameter>
+  </member>
+  
+  <member name="M:Recognos.Core.Check.NotEmpty``1(``0,System.String)">
+    <attribute ctor="M:JetBrains.Annotations.AssertionMethodAttribute.#ctor"/>
+    <parameter name="argument">
+      <attribute ctor="M:JetBrains.Annotations.NoEnumerationAttribute.#ctor"/>
+      <attribute ctor="M:JetBrains.Annotations.AssertionConditionAttribute.#ctor(JetBrains.Annotations.AssertionConditionType)">
+        <argument>JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL</argument>
+      </attribute>
+    </parameter>
+  </member>
+  
+</assembly>

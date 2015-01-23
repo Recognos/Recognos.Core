@@ -39,7 +39,7 @@
         /// <summary>
         /// Regular expression to match and remove tags.
         /// </summary>
-        private static Regex tagsExpression =
+        private static readonly Regex tagsExpression =
             new Regex(TagsPattern, RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Singleline);
 
         /// <summary>

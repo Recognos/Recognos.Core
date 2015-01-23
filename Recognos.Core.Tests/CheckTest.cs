@@ -162,12 +162,6 @@
         }
 
         [Fact]
-        public void ConditionTest1()
-        {
-            Assert.Throws<InvalidOperationException>(() => Check.Condition(false));
-        }
-
-        [Fact]
         public void ConditionTest2()
         {
             Assert.Throws<InvalidOperationException>(() => Check.Condition(false, "asd"));
@@ -178,7 +172,6 @@
         {
             Assert.DoesNotThrow(() =>
             {
-                Check.Condition(true);
                 Check.Condition(true, "asd");
             });
         }

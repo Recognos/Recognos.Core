@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Recognos.Core</id>
-        <version>2.0.4</version>
+        <version>2.0.5</version>
         <title>Recognos Core Libaries</title>
         <authors>Recognos Romania</authors>
         <owners>Recognos</owners>
@@ -10,19 +10,20 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Collection of common utilities &amp; extension methods, optimized &amp; tested. Recommended for all C# projects.</description>
         <summary>Recognos Core Libraries</summary>
-        <copyright>Recognos Romania 2014</copyright>
+        <copyright>Recognos Romania 2015</copyright>
     </metadata>
     <files>
         <file src="Build\Release\net40\Recognos.Core.dll" target="lib\net40\Recognos.Core.dll" />
         <file src="Build\Release\net40\Recognos.Core.pdb" target="lib\net40\Recognos.Core.pdb" />
         <file src="Build\Release\net40\Recognos.Core.xml" target="lib\net40\Recognos.Core.xml" />
+		<file src="Build\Release\net40\Recognos.Core.xml" target="lib\net40\Recognos.Core.ExternalAnnotations.xml" />
 
         <file src="Build\Release\net45\Recognos.Core.dll" target="lib\net45\Recognos.Core.dll" />
         <file src="Build\Release\net45\Recognos.Core.pdb" target="lib\net45\Recognos.Core.pdb" />
-        <file src="Build\Release\net45\Recognos.Core.xml" target="lib\net45\Recognos.Core.xml" />
+        <file src="Build\Release\net45\Recognos.Core.xml" target="lib\net45\Recognos.Core.ExternalAnnotations.xml" />
 
         <file src="Build\Release\net451\Recognos.Core.dll" target="lib\net451\Recognos.Core.dll" />
         <file src="Build\Release\net451\Recognos.Core.pdb" target="lib\net451\Recognos.Core.pdb" />
-        <file src="Build\Release\net451\Recognos.Core.xml" target="lib\net451\Recognos.Core.xml" />
+        <file src="Build\Release\net451\Recognos.Core.xml" target="lib\net451\Recognos.Core.ExternalAnnotations.xml" />
     </files>
 </package>

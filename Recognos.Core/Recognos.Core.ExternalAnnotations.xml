@@ -25,6 +25,9 @@
       <argument>message</argument>
     </attribute>
     <attribute ctor="M:JetBrains.Annotations.AssertionMethodAttribute.#ctor"/>
+    <attribute ctor="M:JetBrains.Annotations.ContractAnnotationAttribute.#ctor(System.String)">
+      <argument>expression:false=&gt;halt</argument>
+    </attribute>
     <parameter name="expression">
       <attribute ctor="M:JetBrains.Annotations.AssertionConditionAttribute.#ctor(JetBrains.Annotations.AssertionConditionType)">
         <argument>JetBrains.Annotations.AssertionConditionType.IS_TRUE</argument>
@@ -36,46 +39,72 @@
       <argument>message</argument>
     </attribute>
     <attribute ctor="M:JetBrains.Annotations.AssertionMethodAttribute.#ctor"/>
+    <attribute ctor="M:JetBrains.Annotations.ContractAnnotationAttribute.#ctor(System.String)">
+      <argument>expression:false=&gt;halt</argument>
+    </attribute>
     <parameter name="expression">
       <attribute ctor="M:JetBrains.Annotations.AssertionConditionAttribute.#ctor(JetBrains.Annotations.AssertionConditionType)">
         <argument>JetBrains.Annotations.AssertionConditionType.IS_TRUE</argument>
       </attribute>
     </parameter>
   </member>
-  <member name="M:Recognos.Core.Check.Condition(System.Boolean,System.String,System.Object)">
+  <member name="M:Recognos.Core.Check.Condition``1(System.Boolean,System.String,``0)">
     <attribute ctor="M:JetBrains.Annotations.StringFormatMethodAttribute.#ctor(System.String)">
       <argument>message</argument>
     </attribute>
     <attribute ctor="M:JetBrains.Annotations.AssertionMethodAttribute.#ctor"/>
+    <attribute ctor="M:JetBrains.Annotations.ContractAnnotationAttribute.#ctor(System.String)">
+      <argument>expression:false=&gt;halt</argument>
+    </attribute>
     <parameter name="expression">
       <attribute ctor="M:JetBrains.Annotations.AssertionConditionAttribute.#ctor(JetBrains.Annotations.AssertionConditionType)">
         <argument>JetBrains.Annotations.AssertionConditionType.IS_TRUE</argument>
       </attribute>
     </parameter>
   </member>
-  <member name="M:Recognos.Core.Check.Condition(System.Boolean,System.String,System.Object,System.Object)">
+  <member name="M:Recognos.Core.Check.Condition``2(System.Boolean,System.String,``0,``1)">
     <attribute ctor="M:JetBrains.Annotations.StringFormatMethodAttribute.#ctor(System.String)">
       <argument>message</argument>
     </attribute>
     <attribute ctor="M:JetBrains.Annotations.AssertionMethodAttribute.#ctor"/>
+    <attribute ctor="M:JetBrains.Annotations.ContractAnnotationAttribute.#ctor(System.String)">
+      <argument>expression:false=&gt;halt</argument>
+    </attribute>
     <parameter name="expression">
       <attribute ctor="M:JetBrains.Annotations.AssertionConditionAttribute.#ctor(JetBrains.Annotations.AssertionConditionType)">
         <argument>JetBrains.Annotations.AssertionConditionType.IS_TRUE</argument>
       </attribute>
     </parameter>
   </member>
-  <member name="M:Recognos.Core.Check.Condition(System.Boolean,System.String,System.Object,System.Object,System.Object)">
+  <member name="M:Recognos.Core.Check.Condition``3(System.Boolean,System.String,``0,``1,``2)">
     <attribute ctor="M:JetBrains.Annotations.StringFormatMethodAttribute.#ctor(System.String)">
       <argument>message</argument>
     </attribute>
     <attribute ctor="M:JetBrains.Annotations.AssertionMethodAttribute.#ctor"/>
+    <attribute ctor="M:JetBrains.Annotations.ContractAnnotationAttribute.#ctor(System.String)">
+      <argument>expression:false=&gt;halt</argument>
+    </attribute>
     <parameter name="expression">
       <attribute ctor="M:JetBrains.Annotations.AssertionConditionAttribute.#ctor(JetBrains.Annotations.AssertionConditionType)">
         <argument>JetBrains.Annotations.AssertionConditionType.IS_TRUE</argument>
       </attribute>
     </parameter>
   </member>
-
+  <member name="M:Recognos.Core.Check.Condition``4(System.Boolean,System.String,``0,``1,``2,``3)">
+    <attribute ctor="M:JetBrains.Annotations.StringFormatMethodAttribute.#ctor(System.String)">
+      <argument>message</argument>
+    </attribute>
+    <attribute ctor="M:JetBrains.Annotations.AssertionMethodAttribute.#ctor"/>
+    <attribute ctor="M:JetBrains.Annotations.ContractAnnotationAttribute.#ctor(System.String)">
+      <argument>expression:false=&gt;halt</argument>
+    </attribute>
+    <parameter name="expression">
+      <attribute ctor="M:JetBrains.Annotations.AssertionConditionAttribute.#ctor(JetBrains.Annotations.AssertionConditionType)">
+        <argument>JetBrains.Annotations.AssertionConditionType.IS_TRUE</argument>
+      </attribute>
+    </parameter>
+  </member>
+  
   <member name="M:Recognos.Core.Check.NotNull``1(``0,System.String)">
     <attribute ctor="M:JetBrains.Annotations.AssertionMethodAttribute.#ctor"/>
     <parameter name="argument">

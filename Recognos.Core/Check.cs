@@ -261,12 +261,30 @@
         /// <param name="arg0">Argument to format message with</param>
         /// <param name="arg1">Argument to format message with</param>
         /// <param name="arg2">Argument to format message with</param>
+        /// <param name="arg3">Argument to format message with</param>
         [DebuggerStepThrough]
-        public static void Condition(bool expression, string message, object arg0, object arg1, object arg2)
+        public static void Condition<T1, T2, T3, T4>(bool expression, string message, T1 arg0, T2 arg1, T3 arg2, T4 arg3)
         {
             if (!expression)
             {
-                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, message, arg0, arg1, arg2));
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, message, arg0.ToString(), arg1.ToString(), arg2.ToString(), arg3.ToString()));
+            }
+        }
+
+        /// <summary>
+        /// verify that condition is true
+        /// </summary>
+        /// <param name="expression">Expression to check</param>
+        /// <param name="message">Message to put in exception if expression is false</param>
+        /// <param name="arg0">Argument to format message with</param>
+        /// <param name="arg1">Argument to format message with</param>
+        /// <param name="arg2">Argument to format message with</param>
+        [DebuggerStepThrough]
+        public static void Condition<T1, T2, T3>(bool expression, string message, T1 arg0, T2 arg1, T3 arg2)
+        {
+            if (!expression)
+            {
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, message, arg0.ToString(), arg1.ToString(), arg2.ToString()));
             }
         }
 
@@ -278,11 +296,11 @@
         /// <param name="arg0">Argument to format message with</param>
         /// <param name="arg1">Argument to format message with</param>
         [DebuggerStepThrough]
-        public static void Condition(bool expression, string message, object arg0, object arg1)
+        public static void Condition<T1, T2>(bool expression, string message, T1 arg0, T2 arg1)
         {
             if (!expression)
             {
-                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, message, arg0, arg1));
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, message, arg0.ToString(), arg1.ToString()));
             }
         }
 
@@ -293,11 +311,11 @@
         /// <param name="message">Message to put in exception if expression is false</param>
         /// <param name="arg0">Argument to format message with</param>
         [DebuggerStepThrough]
-        public static void Condition(bool expression, string message, object arg0)
+        public static void Condition<T>(bool expression, string message, T arg0)
         {
             if (!expression)
             {
-                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, message, arg0));
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, message, arg0.ToString()));
             }
         }
 

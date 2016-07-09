@@ -10,6 +10,7 @@
     using System.Net;
     using System.Text;
     using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Various extension methods for string operations.
@@ -386,6 +387,35 @@
         }
 
         /// <summary>
+        /// compress input string using GZip
+        /// </summary>
+        /// <param name="text">Text to compress</param>
+        /// <returns>The compressed string</returns>
+        public static async Task<string> GzipCompressAsync(this string text)
+        {
+            Check.NotNull(text, "text");
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                byte[] buffer = Encoding.UTF8.GetBytes(text);
+                using (GZipStream zip = new GZipStream(ms, CompressionMode.Compress, true))
+                {
+                    await zip.WriteAsync(buffer, 0, buffer.Length).ConfigureAwait(false);
+                }
+
+                ms.Position = 0;
+
+                byte[] compressed = new byte[ms.Length];
+                await ms.ReadAsync(compressed, 0, compressed.Length).ConfigureAwait(false);
+
+                byte[] gzippedBuffer = new byte[compressed.Length + 4];
+                Buffer.BlockCopy(compressed, 0, gzippedBuffer, 4, compressed.Length);
+                Buffer.BlockCopy(BitConverter.GetBytes(buffer.Length), 0, gzippedBuffer, 0, 4);
+                return Convert.ToBase64String(gzippedBuffer);
+            }
+        }
+
+        /// <summary>
         /// Decompress a GZip compressed string
         /// </summary>
         /// <param name="compressedText">Compressed text to decompress</param>
@@ -406,6 +436,33 @@
                 using (GZipStream zip = new GZipStream(ms, CompressionMode.Decompress))
                 {
                     zip.Read(buffer, 0, buffer.Length);
+                }
+
+                return Encoding.UTF8.GetString(buffer);
+            }
+        }
+
+        /// <summary>
+        /// Decompress a GZip compressed string
+        /// </summary>
+        /// <param name="compressedText">Compressed text to decompress</param>
+        /// <returns>The decompressed string</returns>
+        public static async Task<string> GzipDecompressAsync(this string compressedText)
+        {
+            Check.NotNull(compressedText, "compressedText");
+
+            byte[] gzippedBuffer = Convert.FromBase64String(compressedText);
+            using (MemoryStream ms = new MemoryStream())
+            {
+                int msgLength = BitConverter.ToInt32(gzippedBuffer, 0);
+                ms.Write(gzippedBuffer, 4, gzippedBuffer.Length - 4);
+
+                byte[] buffer = new byte[msgLength];
+
+                ms.Position = 0;
+                using (GZipStream zip = new GZipStream(ms, CompressionMode.Decompress))
+                {
+                    await zip.ReadAsync(buffer, 0, buffer.Length).ConfigureAwait(false);
                 }
 
                 return Encoding.UTF8.GetString(buffer);

@@ -7,13 +7,12 @@ using Xunit;
 
 namespace Recognos.Test.Core
 {
-
     public class UriExtensionsTests
     {
         [Fact]
         public void UriExtensions_ExtractUris_SimpleUri()
         {
-            string input = "http://www.google.com";
+            const string input = "http://www.google.com";
             Uri expected = new Uri(input);
 
             input.ExtractUris().Single().Should().Be(expected);
@@ -22,7 +21,7 @@ namespace Recognos.Test.Core
         [Fact]
         public void UriExtensions_ExtractUris_FromHtml()
         {
-            string input = "<a href=\"http://www.google.com\"><other";
+            const string input = "<a href=\"http://www.google.com\"><other";
             Uri expected = new Uri("http://www.google.com");
 
             input.ExtractUris().Single().Should().Be(expected);
@@ -31,7 +30,7 @@ namespace Recognos.Test.Core
         [Fact]
         public void UriExtensions_ExtractUris()
         {
-            string input = " Support the awesome drummer Eddie Fisher of OneRepublic! Go to the Facebook page and click \"I like\"! http://www.facebook.com/pages/Eddie-Fisher-OneRepublic-F ...";
+            const string input = " Support the awesome drummer Eddie Fisher of OneRepublic! Go to the Facebook page and click \"I like\"! http://www.facebook.com/pages/Eddie-Fisher-OneRepublic-F ...";
             Uri expected = new Uri("http://www.facebook.com/pages/Eddie-Fisher-OneRepublic-F");
 
             input.ExtractUris().Single().Should().Be(expected);
@@ -40,7 +39,7 @@ namespace Recognos.Test.Core
         [Fact]
         public void UriExtensions_ExtractUris_WithoutHost()
         {
-            string input = "{asd:}";
+            const string input = "{asd:}";
             input.ExtractUris().Any().Should().BeFalse();
         }
 
@@ -100,7 +99,5 @@ namespace Recognos.Test.Core
             Uri uri = new Uri("http://tinyurl.com/3lesxnx");
             uri.ResolveRedirects().Should().Be(new Uri("http://edition.cnn.com/2011/WORLD/europe/07/18/uk.committee.hearing/"));
         }
-
     }
-
 }

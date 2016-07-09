@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FluentAssertions;using Xunit;
-
+using FluentAssertions;
+using Xunit;
 using Recognos.Core;
 
 namespace Recognos.Test.Core
 {
-    
     public class ValueExtensionsTests
     {
         [Fact]

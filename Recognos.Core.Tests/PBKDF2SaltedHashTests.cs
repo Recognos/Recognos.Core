@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using FluentAssertions;
 using Xunit;
+
 namespace Recognos.Core.Tests
 {
     public class PBKDF2SaltedHashTests
@@ -17,8 +18,8 @@ namespace Recognos.Core.Tests
         {
             var hash = PBKDF2SaltedHash.GenerateHash("test");
             int algo = "PBKDF2".Length;
-            int iteations = int.Parse(hash.Substring(algo, hash.IndexOf(".", algo) - algo), NumberStyles.HexNumber);
-            iteations.Should().Be(1000);
+            int iterations = int.Parse(hash.Substring(algo, hash.IndexOf(".", algo) - algo), NumberStyles.HexNumber);
+            iterations.Should().Be(1000);
         }
 
         [Fact]
@@ -33,16 +34,14 @@ namespace Recognos.Core.Tests
         }
 
         [Fact]
-        public void VerifiesGenertedHash()
+        public void VerifiesGeneratedHash()
         {
             var hash = PBKDF2SaltedHash.GenerateHash("test");
             PBKDF2SaltedHash.VerifyHash("test", hash).Should().BeTrue();
             PBKDF2SaltedHash.VerifyHash("test1", hash).Should().BeFalse();
 
-
-            var week = SaltedHash.Generate("test");
+            var weak = SaltedHash.Generate("test");
             var strong = SaltedHash.Generate("test");
         }
-
     }
 }

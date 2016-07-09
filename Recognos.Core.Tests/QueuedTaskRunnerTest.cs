@@ -6,23 +6,20 @@ using Xunit;
 
 namespace Recognos.Test.Core
 {
-    /// <summary>
-    /// Summary description for QueuedTaskTunnerTest
-    /// </summary>
-
     public class QueuedTaskRunnerTest
     {
         [Fact]
         public void QueuedTaskRunnerRunTaskTest()
         {
-
-            int nrTask = 100;
+            const int nrTask = 100;
             int count = 0;
 
             using (TaskExecutor runner = new TaskExecutor(1))
             {
                 for (int i = 0; i < nrTask; ++i)
+                {
                     runner.AddTask(() => count++);
+                }
             }
 
             count.Should().Be(nrTask);
@@ -51,33 +48,35 @@ namespace Recognos.Test.Core
         {
             Action action = () => { throw new InvalidOperationException("boom"); };
             int calledTimes = 0;
-            int baseThreadid = System.Threading.Thread.CurrentThread.ManagedThreadId;
+            int baseThreadId = System.Threading.Thread.CurrentThread.ManagedThreadId;
             using (TaskExecutor runner = new TaskExecutor(1))
             {
                 runner.HasErrors.Should().BeFalse();
                 runner.OnTaskError += (sender, args) =>
-                    {
-                        sender.Should().BeSameAs(runner);
-                        args.TaskException.Should().BeOfType<InvalidOperationException>();
-                        System.Threading.Thread.CurrentThread.ManagedThreadId.Should().Be(baseThreadid);
-                        calledTimes++;
-                        args.WasHandled = true;
-                    };
+                {
+                    sender.Should().BeSameAs(runner);
+                    args.TaskException.Should().BeOfType<InvalidOperationException>();
+                    System.Threading.Thread.CurrentThread.ManagedThreadId.Should().Be(baseThreadId);
+                    calledTimes++;
+                    args.WasHandled = true;
+                };
                 runner.OnThreadTaskError += (sender, args) =>
-                    {
-                        sender.Should().BeSameAs(runner);
-                        args.TaskException.Should().BeOfType<InvalidOperationException>();
-                        baseThreadid.Should().NotBe(System.Threading.Thread.CurrentThread.ManagedThreadId);
+                {
+                    sender.Should().BeSameAs(runner);
+                    args.TaskException.Should().BeOfType<InvalidOperationException>();
+                    baseThreadId.Should().NotBe(System.Threading.Thread.CurrentThread.ManagedThreadId);
 
-                        args.WasHandled = true;
-                    };
+                    args.WasHandled = true;
+                };
 
-                Enumerable.Range(0, 5).ToList().ForEach(n => runner.AddTask(action));
+                foreach (var n in Enumerable.Range(0, 5))
+                {
+                    runner.AddTask(action);
+                }
                 runner.Finish();
                 runner.HasErrors.Should().BeTrue();
             }
             calledTimes.Should().Be(5);
-
         }
     }
 }

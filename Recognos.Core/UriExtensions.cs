@@ -81,9 +81,11 @@
 
             HttpWebRequest request = WebRequest.Create(uri) as HttpWebRequest;
 
+            const string UserAgent = @"Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)";
+            const string Accept = @"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
 
-            request.UserAgent = @"Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)";
-            request.Accept = @"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+            request.UserAgent = UserAgent;
+            request.Accept = Accept;
             try
             {
                 using (WebResponse response = request.GetResponse())
@@ -102,8 +104,8 @@
                     }
 
                     request = WebRequest.Create(uri) as HttpWebRequest;
-                    request.UserAgent = @"Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)";
-                    request.Accept = @"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+                    request.UserAgent = UserAgent;
+                    request.Accept = Accept;
                     try
                     {
                         using (response = request.GetResponse() as HttpWebResponse)

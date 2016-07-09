@@ -44,6 +44,11 @@
             new Regex(TagsPattern, RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Singleline);
 
         /// <summary>
+        /// Characters that represent word boundaries.
+        /// </summary>
+        private static readonly char[] wordSeparators = new[] { ' ', '\n' };
+
+        /// <summary>
         /// Determines whether this string and a specified System.String object have the same value ignoring their casing.
         /// </summary>
         /// <remarks>
@@ -569,7 +574,7 @@
             while (size <= length && size < (input.Length - 1))
             {
                 lastIndex = index;
-                index = input.LastIndexOfAny(new[] { ' ', '\n' }, index - 1);
+                index = input.LastIndexOfAny(wordSeparators, index - 1);
 
                 if (index <= 0)
                 {
@@ -637,7 +642,7 @@
             while (index <= length && index <= input.Length)
             {
                 lastindex = index;
-                index = input.IndexOfAny(new[] { ' ', '\n' }, index + 1);
+                index = input.IndexOfAny(wordSeparators, index + 1);
 
                 if (index <= 0)
                 {
@@ -669,10 +674,9 @@
 
             int count = 0;
             int index = input.Length - 1;
-
             while (count < wordCount)
             {
-                index = input.LastIndexOfAny(new[] { ' ', '\n' }, index - 1);
+                index = input.LastIndexOfAny(wordSeparators, index - 1);
                 if (index <= 0)
                 {
                     index = 0;
@@ -708,10 +712,9 @@
 
             int count = 0;
             int index = 0;
-
             while (count < wordCount)
             {
-                index = input.IndexOfAny(new[] { ' ', '\n' }, index + 1);
+                index = input.IndexOfAny(wordSeparators, index + 1);
                 if (index <= 0)
                 {
                     index = 0;

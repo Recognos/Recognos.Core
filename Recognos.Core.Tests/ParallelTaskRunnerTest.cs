@@ -229,7 +229,9 @@ namespace Recognos.Test.Core
 
                 runner.AddTask(() => { throw x; });
 
-                Assert.DoesNotThrow(() => runner.Finish());
+                Action action = () => runner.Finish();
+
+                action.ShouldNotThrow();
             }
         }
 

@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -82,7 +81,7 @@ namespace Recognos.Core
         /// <param name="assemblyMatch">Predicate to apply when considering assemblies.</param>
         public static void EnsureReferencesAreLoaded(Predicate<string> assemblyMatch)
         {
-            Check.NotNull(assemblyMatch, "assemblyMatch");
+            Check.NotNull(assemblyMatch, nameof(assemblyMatch));
             lock (padlock)
             {
                 new ReferencedAssemblyLoader(Assembly.GetEntryAssembly(), assemblyMatch);
@@ -97,8 +96,8 @@ namespace Recognos.Core
         /// <param name="assemblyMatch">Predicate to apply when considering assemblies.</param>
         public static void EnsureReferencesAreLoaded(Assembly root, Predicate<string> assemblyMatch)
         {
-            Check.NotNull(root, "root");
-            Check.NotNull(assemblyMatch, "assemblyMatch");
+            Check.NotNull(root, nameof(root));
+            Check.NotNull(assemblyMatch, nameof(assemblyMatch));
             new ReferencedAssemblyLoader(root, assemblyMatch);
         }
 

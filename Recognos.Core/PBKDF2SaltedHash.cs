@@ -40,7 +40,7 @@ namespace Recognos.Core
         /// <returns>Formated password hash</returns>
         public static string GenerateHash(string password)
         {
-            Check.NotEmpty(password, "password");
+            Check.NotEmpty(password, nameof(password));
 
             byte[] pass = Encoding.UTF8.GetBytes(password);
             byte[] salt = GenerateSalt(DefaultSaltSize);
@@ -60,8 +60,8 @@ namespace Recognos.Core
         /// <returns>True if the hash matches the hashed password.</returns>
         public static bool VerifyHash(string password, string hash)
         {
-            Check.NotEmpty(password, "password");
-            Check.NotEmpty(hash, "hash");
+            Check.NotEmpty(password, nameof(password));
+            Check.NotEmpty(hash, nameof(hash));
 
             if (hash.Substring(0, HashPrefix.Length) != HashPrefix)
             {

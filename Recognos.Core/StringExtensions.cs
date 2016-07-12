@@ -321,7 +321,7 @@
         /// <returns>The enumeration value.</returns>
         public static T ToEnum<T>(this string value) where T : struct
         {
-            Check.NotEmpty(value, "value");
+            Check.NotEmpty(value, nameof(value));
             Check.Condition(typeof(T).IsEnum, Format.Invariant("The type {0} must be an enum.", typeof(T).Name));
 
             T result;
@@ -369,7 +369,7 @@
         /// <returns>The compressed string</returns>
         public static string GzipCompress(this string text)
         {
-            Check.NotNull(text, "text");
+            Check.NotNull(text, nameof(text));
 
             using (MemoryStream ms = new MemoryStream())
             {
@@ -398,7 +398,7 @@
         /// <returns>The compressed string</returns>
         public static async Task<string> GzipCompressAsync(this string text)
         {
-            Check.NotNull(text, "text");
+            Check.NotNull(text, nameof(text));
 
             using (MemoryStream ms = new MemoryStream())
             {
@@ -427,7 +427,7 @@
         /// <returns>The decompressed string</returns>
         public static string GzipDecompress(this string compressedText)
         {
-            Check.NotNull(compressedText, "compressedText");
+            Check.NotNull(compressedText, nameof(compressedText));
 
             byte[] gzippedBuffer = Convert.FromBase64String(compressedText);
             using (MemoryStream ms = new MemoryStream())
@@ -454,7 +454,7 @@
         /// <returns>The decompressed string</returns>
         public static async Task<string> GzipDecompressAsync(this string compressedText)
         {
-            Check.NotNull(compressedText, "compressedText");
+            Check.NotNull(compressedText, nameof(compressedText));
 
             byte[] gzippedBuffer = Convert.FromBase64String(compressedText);
             using (MemoryStream ms = new MemoryStream())
@@ -482,7 +482,7 @@
         /// <returns>String containing the left part of the original string</returns>
         public static string Left(this string target, int size)
         {
-            Check.Positive(size, "size");
+            Check.Positive(size, nameof(size));
             if (string.IsNullOrEmpty(target))
             {
                 return target;
@@ -504,7 +504,7 @@
         /// <returns>String containing the right part of the original string</returns>
         public static string Right(this string target, int size)
         {
-            Check.Positive(size, "size");
+            Check.Positive(size, nameof(size));
             if (string.IsNullOrEmpty(target))
             {
                 return target;
@@ -527,7 +527,7 @@
         /// <returns>The truncated string.</returns>
         public static string RightAtWord(this string input, int length, string prefix)
         {
-            Check.Positive(length, "length");
+            Check.Positive(length, nameof(length));
 
             if (string.IsNullOrEmpty(input))
             {
@@ -551,7 +551,7 @@
         /// <returns>The truncated string.</returns>
         public static string RightAtWord(this string input, int length)
         {
-            Check.Positive(length, "length");
+            Check.Positive(length, nameof(length));
 
             if (string.IsNullOrEmpty(input))
             {
@@ -601,7 +601,7 @@
         /// <returns>The truncated string.</returns>
         public static string LeftAtWord(this string input, int length, string suffix)
         {
-            Check.Positive(length, "length");
+            Check.Positive(length, nameof(length));
 
             if (string.IsNullOrEmpty(input))
             {
@@ -625,7 +625,7 @@
         /// <returns>The truncated string.</returns>
         public static string LeftAtWord(this string input, int length)
         {
-            Check.Positive(length, "length");
+            Check.Positive(length, nameof(length));
 
             if (length >= input.Length)
             {
@@ -661,7 +661,7 @@
         /// <returns>String containing the words.</returns>
         public static string LastWords(this string input, int wordCount)
         {
-            Check.Positive(wordCount, "wordCount");
+            Check.Positive(wordCount, nameof(wordCount));
             if (string.IsNullOrEmpty(input))
             {
                 return string.Empty;
@@ -699,7 +699,7 @@
         /// <returns>String containing the words.</returns>
         public static string FirstWords(this string input, int wordCount)
         {
-            Check.Positive(wordCount, "wordCount");
+            Check.Positive(wordCount, nameof(wordCount));
             if (string.IsNullOrEmpty(input))
             {
                 return string.Empty;
@@ -738,8 +738,8 @@
         /// <returns>String containing the previous lines.</returns>
         public static string PreviousLines(this string input, int position, int numberOfLines)
         {
-            Check.Positive(position, "position");
-            Check.Positive(numberOfLines, "numLines");
+            Check.Positive(position, nameof(position));
+            Check.Positive(numberOfLines, nameof(numberOfLines));
             Check.Condition(position == 0 || position < input.Length, "Position must be less than the string length");
 
             if (string.IsNullOrEmpty(input))
@@ -781,8 +781,8 @@
         /// </returns>
         public static string NextLines(this string input, int position, int numberOfLines)
         {
-            Check.Positive(position, "position");
-            Check.Positive(numberOfLines, "numLines");
+            Check.Positive(position, nameof(position));
+            Check.Positive(numberOfLines, nameof(numberOfLines));
             Check.Condition(position == 0 || position < input.Length, "Position must be less than the string length");
 
             if (string.IsNullOrEmpty(input))
@@ -824,7 +824,7 @@
         /// </returns>
         public static string FirstLines(this string input, int numberOfLines)
         {
-            Check.Positive(numberOfLines, "numLines");
+            Check.Positive(numberOfLines, nameof(numberOfLines));
 
             if (numberOfLines == 0)
             {
@@ -844,7 +844,7 @@
         /// </returns>
         public static string LastLines(this string input, int numberOfLines)
         {
-            Check.Positive(numberOfLines, "numLines");
+            Check.Positive(numberOfLines, nameof(numberOfLines));
 
             if (string.IsNullOrEmpty(input))
             {
@@ -868,8 +868,8 @@
         /// <returns>The selected substring.</returns>
         public static string SafeSubstring(this string input, int start, int length)
         {
-            Check.Positive(start, "start");
-            Check.Positive(length, "length");
+            Check.Positive(start, nameof(start));
+            Check.Positive(length, nameof(length));
 
             if (string.IsNullOrEmpty(input) || length == 0)
             {
@@ -900,8 +900,8 @@
         [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "The interface is clear")]
         public static string Highlight(this string input, string format, IEnumerable<Tuple<int, int>> indexes)
         {
-            Check.NotEmpty(format, "format");
-            Check.NotNull(indexes, "indexes");
+            Check.NotEmpty(format, nameof(format));
+            Check.NotNull(indexes, nameof(indexes));
 
             if (string.IsNullOrEmpty(input))
             {

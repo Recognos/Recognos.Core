@@ -51,7 +51,7 @@
         /// </returns>
         public static bool IsWeb(this Uri uri)
         {
-            Check.NotNull(uri, "uri");
+            Check.NotNull(uri, nameof(uri));
             return uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps;
         }
 
@@ -76,7 +76,7 @@
         /// <returns>The final uri after following the redirects.</returns>
         public static Uri ResolveRedirects(this Uri uri, Func<WebException, Uri> error)
         {
-            Check.NotNull(uri, "uri");
+            Check.NotNull(uri, nameof(uri));
             Check.Condition(uri.IsWeb(), "Redirects can be resolved only for web requests");
 
             HttpWebRequest request = WebRequest.Create(uri) as HttpWebRequest;

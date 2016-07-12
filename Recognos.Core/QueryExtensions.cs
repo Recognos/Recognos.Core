@@ -23,8 +23,8 @@
         [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "The interface is clear")]
         public static IQueryable<T> ApplyIf<T>(this IQueryable<T> query, bool apply, Expression<Func<T, bool>> filter)
         {
-            Check.NotNull(query, "query");
-            Check.NotNull(filter, "filter");
+            Check.NotNull(query, nameof(query));
+            Check.NotNull(filter, nameof(filter));
 
             return apply ? query.Where(filter) : query;
         }
@@ -244,8 +244,8 @@
         [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "The interface is clear")]
         public static IOrderedQueryable<T> OrderBy<T, TKey>(this IQueryable<T> query, Expression<Func<T, TKey>> keySelector, bool descending)
         {
-            Check.NotNull(query, "query");
-            Check.NotNull(keySelector, "keySelector");
+            Check.NotNull(query, nameof(query));
+            Check.NotNull(keySelector, nameof(keySelector));
 
             if (descending)
             {
@@ -267,8 +267,8 @@
         [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "The interface is clear")]
         public static IOrderedQueryable<T> OrderBy<T, TKey>(this IQueryable<T> query, Expression<Func<T, TKey>> keySelector, ListSortDirection direction)
         {
-            Check.NotNull(query, "query");
-            Check.NotNull(keySelector, "keySelector");
+            Check.NotNull(query, nameof(query));
+            Check.NotNull(keySelector, nameof(keySelector));
 
             return query.OrderBy(keySelector, direction == ListSortDirection.Descending);
         }
@@ -284,8 +284,8 @@
         [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "The interface is clear")]
         public static IOrderedQueryable<T> OrderBy<T, TKey>(this IQueryable<T> query, ICollection<Tuple<Expression<Func<T, TKey>>, ListSortDirection>> sortDescriptor)
         {
-            Check.NotNull(query, "query");
-            Check.NotEmpty(sortDescriptor, "sortDescriptor");
+            Check.NotNull(query, nameof(query));
+            Check.NotEmpty(sortDescriptor, nameof(sortDescriptor));
 
             var first = sortDescriptor.First();
 

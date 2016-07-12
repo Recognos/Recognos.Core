@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using FluentAssertions;
 using Recognos.Core;
 using Xunit;
+using System.Threading.Tasks;
 
 namespace Recognos.Test.Core
 {
@@ -50,6 +51,17 @@ namespace Recognos.Test.Core
             string expected = "abcdefghijklmn0123456789";
             string compressedText = StringExtensions.GzipCompress(input);
             string actual = StringExtensions.GzipDecompress(compressedText);
+
+            actual.Should().Be(expected);
+        }
+
+        [Fact]
+        public async Task StringExtensions_GzipCompressionDecompressTest_Async()
+        {
+            string input = "abcdefghijklmn0123456789";
+            string expected = "abcdefghijklmn0123456789";
+            string compressedText = await StringExtensions.GzipCompressAsync(input).ConfigureAwait(false);
+            string actual = await StringExtensions.GzipDecompressAsync(compressedText).ConfigureAwait(false);
 
             actual.Should().Be(expected);
         }

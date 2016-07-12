@@ -7,9 +7,10 @@
     using System.IO.Compression;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
 
     /// <summary>
-    /// various conversion extensions
+    /// Various conversion extensions
     /// </summary>
     public static class DataExtensions
     {
@@ -30,6 +31,29 @@
                 using (GZipStream zip = new GZipStream(ms, CompressionMode.Compress, true))
                 {
                     zip.Write(data, 0, data.Length);
+                }
+
+                return ms.ToArray();
+            }
+        }
+
+        /// <summary>
+        /// Compresses the specified data.
+        /// </summary>
+        /// <param name="data">The data to compress.</param>
+        /// <returns>The compressed data.</returns>
+        public static async Task<byte[]> CompressAsync(this byte[] data)
+        {
+            if (data == null || data.Length == 0)
+            {
+                return data;
+            }
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                using (GZipStream zip = new GZipStream(ms, CompressionMode.Compress, true))
+                {
+                    await zip.WriteAsync(data, 0, data.Length).ConfigureAwait(false);
                 }
 
                 return ms.ToArray();
@@ -70,6 +94,39 @@
         }
 
         /// <summary>
+        /// Decompresses the specified data.
+        /// </summary>
+        /// <param name="data">The data to decompress.</param>
+        /// <returns>The decompressed data.</returns>
+        public static async Task<byte[]> DecompressAsync(this byte[] data)
+        {
+            if (data == null || data.Length == 0)
+            {
+                return data;
+            }
+
+            using (MemoryStream ms = new MemoryStream(data, false))
+            {
+                byte[] buf = new byte[1024];
+                using (GZipStream zip = new GZipStream(ms, CompressionMode.Decompress))
+                {
+                    using (MemoryStream output = new MemoryStream())
+                    {
+                        bool done = false;
+                        while (!done)
+                        {
+                            int read = await zip.ReadAsync(buf, 0, buf.Length).ConfigureAwait(false);
+                            output.Write(buf, 0, read);
+                            done = read < buf.Length;
+                        }
+
+                        return output.ToArray();
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// convert data into hexa decimal representation
         /// </summary>
         /// <param name="data">Data to convert</param>
@@ -79,7 +136,8 @@
             Check.NotNull(data, "data");
             return data.Aggregate(
                 new StringBuilder(32),
-                (sb, bit) => sb.Append(bit.ToString("X2", CultureInfo.InvariantCulture))).ToString();
+                (sb, bit) => sb.Append(bit.ToString("X2", CultureInfo.InvariantCulture))
+            ).ToString();
         }
 
         /// <summary>

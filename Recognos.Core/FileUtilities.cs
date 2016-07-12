@@ -4,6 +4,7 @@
     using System.IO;
     using System.Security.Cryptography;
     using System.Text;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Utilities for handling files
@@ -54,6 +55,21 @@
         }
 
         /// <summary>
+        /// Saves a stream to a file.
+        /// </summary>
+        /// <param name="stream">The stream.</param>
+        /// <param name="pathToFile">The path to file.</param>
+        public static async Task SaveToFileAsync(this Stream stream, string pathToFile)
+        {
+            Check.NotNull(stream, "stream");
+            Check.NotEmpty(pathToFile, "pathToFile");
+            using (Stream output = File.Open(pathToFile, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
+            {
+                await stream.CopyToAsync(output).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary>
         /// Saves a stream to another stream.
         /// </summary>
         /// <param name="stream">The input stream.</param>
@@ -63,6 +79,18 @@
             Check.NotNull(stream, "stream");
             Check.NotNull(outputStream, "outputStream");
             stream.CopyTo(outputStream);
+        }
+
+        /// <summary>
+        /// Saves a stream to another stream.
+        /// </summary>
+        /// <param name="stream">The input stream.</param>
+        /// <param name="outputStream">The output stream.</param>
+        public static Task SaveToStreamAsync(this Stream stream, Stream outputStream)
+        {
+            Check.NotNull(stream, "stream");
+            Check.NotNull(outputStream, "outputStream");
+            return stream.CopyToAsync(outputStream);
         }
 
         /// <summary>
@@ -77,6 +105,21 @@
             using (StreamReader reader = new StreamReader(stream))
             {
                 return reader.ReadToEnd();
+            }
+        }
+
+        /// <summary>
+        /// Reads the content from the stream.
+        /// </summary>
+        /// <param name="stream">The stream.</param>
+        /// <returns>The content as a string.</returns>
+        public static async Task<string> ReadContentAsync(this Stream stream)
+        {
+            Check.NotNull(stream, "stream");
+
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                return await reader.ReadToEndAsync().ConfigureAwait(false);
             }
         }
 
@@ -103,6 +146,28 @@
         }
 
         /// <summary>
+        /// Reads the content from the stream as binary.
+        /// </summary>
+        /// <param name="stream">The stream.</param>
+        /// <returns>byte array with the stream content.</returns>
+        public static async Task<byte[]> ReadBinaryContentAsync(this Stream stream)
+        {
+            Check.NotNull(stream, "stream");
+
+            MemoryStream memStream = stream as MemoryStream;
+            if (memStream != null)
+            {
+                return memStream.ToArray();
+            }
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                await stream.CopyToAsync(ms).ConfigureAwait(false);
+                return ms.ToArray();
+            }
+        }
+
+        /// <summary>
         /// Reads the content from the stream.
         /// </summary>
         /// <param name="stream">The stream.</param>
@@ -116,6 +181,23 @@
             using (StreamReader reader = new StreamReader(stream, encoding))
             {
                 return reader.ReadToEnd();
+            }
+        }
+
+        /// <summary>
+        /// Reads the content from the stream.
+        /// </summary>
+        /// <param name="stream">The stream.</param>
+        /// <param name="encoding">The encoding.</param>
+        /// <returns>The content as a string.</returns>
+        public static async Task<string> ReadContentAsync(this Stream stream, Encoding encoding)
+        {
+            Check.NotNull(stream, "stream");
+            Check.NotNull(encoding, "encoding");
+
+            using (StreamReader reader = new StreamReader(stream, encoding))
+            {
+                return await reader.ReadToEndAsync().ConfigureAwait(false);
             }
         }
     }

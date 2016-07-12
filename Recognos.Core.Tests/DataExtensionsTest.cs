@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using FluentAssertions;
 using Recognos.Core;
 using Xunit;
+using System.Threading.Tasks;
 
 namespace Recognos.Test.Core
 {
@@ -13,7 +13,7 @@ namespace Recognos.Test.Core
         [Fact]
         public void DataExtensions_Compress_Decompress()
         {
-            string sample = "This is a test class for ConversionExtensionsTest and is intended to contain all ConversionExtensionsTest Unit Tests";
+            const string sample = "This is a test class for ConversionExtensionsTest and is intended to contain all ConversionExtensionsTest Unit Tests";
             byte[] data = Encoding.UTF8.GetBytes(sample);
             byte[] compressed = data.Compress();
             byte[] decompressed = compressed.Decompress();
@@ -24,10 +24,23 @@ namespace Recognos.Test.Core
         }
 
         [Fact]
+        public async Task DataExtensions_Compress_Decompress_Async()
+        {
+            const string sample = "This is a test class for ConversionExtensionsTest and is intended to contain all ConversionExtensionsTest Unit Tests";
+            byte[] data = Encoding.UTF8.GetBytes(sample);
+            byte[] compressed = await data.CompressAsync().ConfigureAwait(false);
+            byte[] decompressed = await compressed.DecompressAsync().ConfigureAwait(false);
+            string output = Encoding.UTF8.GetString(decompressed);
+
+            decompressed.Should().Equal(data);
+            output.Should().Be(sample);
+        }
+
+        [Fact]
         public void DataExtensions_ToHexaTest()
         {
             byte[] data = { 0, 1, 15, 255 };
-            string expected = "00010FFF";
+            const string expected = "00010FFF";
 
             DataExtensions.ToHexa(data).Should().Be(expected);
         }
@@ -35,7 +48,7 @@ namespace Recognos.Test.Core
         [Fact]
         public void DataExtensions_ToHexaTestThrowOnNull()
         {
-            Assert.Throws<ArgumentNullException>(() => DataExtensions.ToHexa((byte[])null));
+            Assert.Throws<ArgumentNullException>(() => DataExtensions.ToHexa(null));
         }
 
         [Fact]
@@ -65,7 +78,6 @@ namespace Recognos.Test.Core
         public void DataExtensions_ToEnumThrowOnBadValueTest()
         {
             Assert.Throws<ArgumentException>(() => (-1).ToEnum<TestEnum>());
-
         }
 
         [Fact]
@@ -88,5 +100,18 @@ namespace Recognos.Test.Core
             result.Should().Equal(data);
         }
 
+        [Fact]
+        public async Task FileUtilities_ReadBinaryContentAsync()
+        {
+            byte[] data = Encoding.UTF8.GetBytes("test data");
+
+            byte[] result;
+            using (MemoryStream input = new MemoryStream(data))
+            {
+                result = await input.ReadBinaryContentAsync().ConfigureAwait(false);
+            }
+
+            result.Should().Equal(data);
+        }
     }
 }

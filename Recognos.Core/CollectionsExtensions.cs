@@ -19,8 +19,8 @@
         [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "Interface makes sense for batching")]
         public static IEnumerable<IEnumerable<T>> Batch<T>(this IEnumerable<T> source, int size)
         {
-            Check.NotNull(source, "source");
-            Check.AbsolutePositive(size, "size");
+            Check.NotNull(source, nameof(source));
+            Check.AbsolutePositive(size, nameof(size));
 
             T[] bucket = null;
             var count = 0;

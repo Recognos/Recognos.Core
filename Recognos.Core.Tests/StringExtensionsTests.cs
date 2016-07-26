@@ -12,8 +12,8 @@ namespace Recognos.Test.Core
         [Fact]
         public void StringExtensions_StripTags()
         {
-            string sample = "abc<tag>cde";
-            string expected = "abccde";
+            const string sample = "abc<tag>cde";
+            const string expected = "abccde";
 
             sample.StripTags().Should().Be(expected);
         }
@@ -21,8 +21,8 @@ namespace Recognos.Test.Core
         [Fact]
         public void StringExtensions_StripCommentTags()
         {
-            string sample = "abc<!--tag-->cde";
-            string expected = "abccde";
+            const string sample = "abc<!--tag-->cde";
+            const string expected = "abccde";
 
             sample.StripTags().Should().Be(expected);
         }
@@ -30,8 +30,8 @@ namespace Recognos.Test.Core
         [Fact]
         public void StringExtensions_ReplaceTags()
         {
-            string sample = "abc<tag>cde";
-            string expected = "abc     cde";
+            const string sample = "abc<tag>cde";
+            const string expected = "abc     cde";
 
             sample.StripTags(true).Should().Be(expected);
         }
@@ -39,16 +39,16 @@ namespace Recognos.Test.Core
         [Fact]
         public void StringExtensions_ReplaceEmptyTags()
         {
-            string sample = "abc<>cde";
-            string expected = "abc  cde";
+            const string sample = "abc<>cde";
+            const string expected = "abc  cde";
             sample.StripTags(true).Should().Be(expected);
         }
 
         [Fact]
         public void StringExtensions_GzipCompressionDecompressTest()
         {
-            string input = "abcdefghijklmn0123456789";
-            string expected = "abcdefghijklmn0123456789";
+            const string input = "abcdefghijklmn0123456789";
+            const string expected = "abcdefghijklmn0123456789";
             string compressedText = StringExtensions.GzipCompress(input);
             string actual = StringExtensions.GzipDecompress(compressedText);
 
@@ -69,8 +69,8 @@ namespace Recognos.Test.Core
         [Fact]
         public void StringExtensions_CaseInsensitiveEquals()
         {
-            string left = "abcdefghijklmn0123456789";
-            string right = "abcdefghijklmn0123456789";
+            const string left = "abcdefghijklmn0123456789";
+            const string right = "abcdefghijklmn0123456789";
 
             StringExtensions.CaseInsensitiveEquals(left, right).Should().BeTrue();
             StringExtensions.CaseSensitiveEquals(left, right).Should().BeTrue();
@@ -105,14 +105,14 @@ namespace Recognos.Test.Core
         [Fact]
         public void StringExtensions_StripTags_Test()
         {
-            string test1 = "abc";
+            const string test1 = "abc";
             string test2 = string.Empty;
-            string test3 = null;
-            string test4 = "<a>abc";
-            string test4out = "abc";
-            string test5 = "</a>abc";
-            string test5out = "abc";
-            string test6 = "<abc>";
+            const string test3 = null;
+            const string test4 = "<a>abc";
+            const string test4out = "abc";
+            const string test5 = "</a>abc";
+            const string test5out = "abc";
+            const string test6 = "<abc>";
             string test6out = string.Empty;
 
             test1.StripTags().Should().Be(test1);
@@ -221,7 +221,7 @@ namespace Recognos.Test.Core
         [Fact]
         public void StringExtensions_RightAtWord()
         {
-            string input = "aaa asd";
+            const string input = "aaa asd";
 
             string.Empty.RightAtWord(0).Should().BeEmpty();
             ((string)null).RightAtWord(10).Should().BeEmpty();
@@ -246,7 +246,7 @@ namespace Recognos.Test.Core
         [Fact]
         public void StringExtensions_LeftAtWord()
         {
-            string input = "asd aaa";
+            const string input = "asd aaa";
 
             input.LeftAtWord(0).Should().BeEmpty();
             input.LeftAtWord(1).Should().BeEmpty();
@@ -268,7 +268,7 @@ namespace Recognos.Test.Core
         [Fact]
         public void StringExtensions_LastWords()
         {
-            string input = "abc cde fgh";
+            const string input = "abc cde fgh";
 
             input.LastWords(0).Should().BeEmpty();
             input.LastWords(1).Should().Be("fgh");
@@ -286,7 +286,7 @@ namespace Recognos.Test.Core
         [Fact]
         public void StringExtensions_FirstWords()
         {
-            string input = "abc cde fgh";
+            const string input = "abc cde fgh";
 
             input.FirstWords(0).Should().BeEmpty();
             input.FirstWords(1).Should().Be("abc");
@@ -310,7 +310,7 @@ namespace Recognos.Test.Core
         [Fact]
         public void StringExtensions_PreviousLines_StartAtZero()
         {
-            string test = "sample";
+            const string test = "sample";
             string result = test.PreviousLines(0, 10);
             result.Should().BeEmpty();
         }
@@ -318,16 +318,16 @@ namespace Recognos.Test.Core
         [Fact]
         public void StringExtensions_PreviousLines_StartAtOne()
         {
-            string test = "sample";
+            const string test = "sample";
             string result = test.PreviousLines(1, 10);
-            string expected = "s";
+            const string expected = "s";
             result.Should().Be(expected);
         }
 
         [Fact]
         public void StringExtensions_PrevousLines()
         {
-            string input = "l1\nl2\nl3\nl4\nl5";
+            const string input = "l1\nl2\nl3\nl4\nl5";
             int idx = input.IndexOf("l3") + 1;
 
             ((string)null).PreviousLines(0, 0).Should().BeEmpty();
@@ -355,14 +355,14 @@ namespace Recognos.Test.Core
         [Fact]
         public void StringExtensions_NextLines_Test()
         {
-            string input = "aaa\nbbb";
+            const string input = "aaa\nbbb";
             input.NextLines(5, 10).Should().Be("bb");
         }
 
         [Fact]
         public void StringExtensions_NextLines()
         {
-            string input = "l1\nl2\nl3\nl4\nl5";
+            const string input = "l1\nl2\nl3\nl4\nl5";
             int idx = input.IndexOf("l3") + 1;
 
             ((string)null).NextLines(0, 0).Should().BeEmpty();
@@ -384,7 +384,7 @@ namespace Recognos.Test.Core
         [Fact]
         public void StringExtensions_FirstLines()
         {
-            string input = "l1\nl2\nl3\nl4\nl5";
+            const string input = "l1\nl2\nl3\nl4\nl5";
 
             ((string)null).FirstLines(0).Should().BeEmpty();
 
@@ -406,7 +406,7 @@ namespace Recognos.Test.Core
         [Fact]
         public void StringExtensions_LastLines()
         {
-            string input = "l1\nl2\nl3\nl4\nl5";
+            const string input = "l1\nl2\nl3\nl4\nl5";
 
             ((string)null).LastLines(0).Should().BeEmpty();
 
@@ -422,7 +422,7 @@ namespace Recognos.Test.Core
         [Fact]
         public void StringExtensions_AllIndexesOf()
         {
-            string input = "asd dsa asd";
+            const string input = "asd dsa asd";
             IEnumerable<int> expected = new int[] { 0, 8 };
             input.AllIndexesOf("asd").Should().Equal(expected);
         }
@@ -430,14 +430,14 @@ namespace Recognos.Test.Core
         [Fact]
         public void StringExtensions_AllIndexesOf_tags()
         {
-            string input = "asd dsa asd";
-            IEnumerable<string> tags = new string[] { "asd", "dsa" };
+            const string input = "asd dsa asd";
+            IEnumerable<string> tags = new[] { "asd", "dsa" };
 
             var expected = new[] 
             {
-                Tuple.Create(0,"asd"),
-                Tuple.Create(4,"dsa"),
-                Tuple.Create(8,"asd")
+                Tuple.Create(0, "asd"),
+                Tuple.Create(4, "dsa"),
+                Tuple.Create(8, "asd")
             };
 
             input.AllIndexesOf(tags).Should().Equal(expected);
@@ -446,10 +446,10 @@ namespace Recognos.Test.Core
         [Fact]
         public void StringExtensions_Highlight_tags()
         {
-            string input = "asd dsa asd";
-            IEnumerable<string> tags = new string[] { "asd", "dsa" };
+            const string input = "asd dsa asd";
+            IEnumerable<string> tags = new[] { "asd", "dsa" };
 
-            string expected = "*asd* *dsa* *asd*";
+            const string expected = "*asd* *dsa* *asd*";
 
             input.Highlight("*{0}*", tags).Should().Be(expected);
         }
@@ -458,7 +458,7 @@ namespace Recognos.Test.Core
         public void StringExtensions_Join_EmptyCollection()
         {
             string[] input = { };
-            string empty = "empty";
+            const string empty = "empty";
 
             input.Join(",", empty).Should().Be(empty);
         }
@@ -466,9 +466,9 @@ namespace Recognos.Test.Core
         [Fact]
         public void StringExtentions_StripHtml()
         {
-            string input = "<test/>a<test>a</test> &nbsp;&amp;&gt;&lt;&quot;&hellip;";
+            const string input = "<test/>a<test>a</test> &nbsp;&amp;&gt;&lt;&quot;&hellip;";
             string strip = input.StripHTML();
-            string expected = "aa  &><\"…";
+            const string expected = "aa  &><\"…";
             strip.Should().Be(expected);
         }
     }

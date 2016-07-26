@@ -242,7 +242,7 @@
         /// <param name="task">Task to add</param>
         public void AddTask(Action task)
         {
-            Check.NotNull(task, "task");
+            Check.NotNull(task, nameof(task));
             Check.Condition(!finished, "This runner has already been terminated by calling Finish");
 
             if (!RunAsync)
@@ -268,7 +268,7 @@
             // if we still have active workers
             while (RemainingTasks > 0)
             {
-                // all workers sould run
+                // all workers should run
                 waitEvent.WakeAll();
 
                 // wait on the flushEvent

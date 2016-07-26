@@ -51,7 +51,7 @@
         /// </returns>
         public static bool IsWeb(this Uri uri)
         {
-            Check.NotNull(uri, "uri");
+            Check.NotNull(uri, nameof(uri));
             return uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps;
         }
 
@@ -76,14 +76,16 @@
         /// <returns>The final uri after following the redirects.</returns>
         public static Uri ResolveRedirects(this Uri uri, Func<WebException, Uri> error)
         {
-            Check.NotNull(uri, "uri");
+            Check.NotNull(uri, nameof(uri));
             Check.Condition(uri.IsWeb(), "Redirects can be resolved only for web requests");
 
             HttpWebRequest request = WebRequest.Create(uri) as HttpWebRequest;
 
+            const string UserAgent = @"Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)";
+            const string Accept = @"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
 
-            request.UserAgent = @"Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)";
-            request.Accept = @"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+            request.UserAgent = UserAgent;
+            request.Accept = Accept;
             try
             {
                 using (WebResponse response = request.GetResponse())
@@ -102,8 +104,8 @@
                     }
 
                     request = WebRequest.Create(uri) as HttpWebRequest;
-                    request.UserAgent = @"Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)";
-                    request.Accept = @"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+                    request.UserAgent = UserAgent;
+                    request.Accept = Accept;
                     try
                     {
                         using (response = request.GetResponse() as HttpWebResponse)

@@ -15,7 +15,7 @@
         /// <returns>The formated string.</returns>
         public static string Invariant(string format, params object[] args)
         {
-            Check.NotEmpty(format, "format");
+            Check.NotEmpty(format, nameof(format));
 
             return string.Format(CultureInfo.InvariantCulture, format, args);
         }
@@ -28,7 +28,7 @@
         /// <returns>The formated string.</returns>
         public static string Invariant(string format, object arg0)
         {
-            Check.NotEmpty(format, "format");
+            Check.NotEmpty(format, nameof(format));
 
             return string.Format(CultureInfo.InvariantCulture, format, arg0);
         }
@@ -42,7 +42,7 @@
         /// <returns>The formated string.</returns>
         public static string Invariant(string format, object arg0, object arg1)
         {
-            Check.NotEmpty(format, "format");
+            Check.NotEmpty(format, nameof(format));
 
             return string.Format(CultureInfo.InvariantCulture, format, arg0, arg1);
         }
@@ -57,7 +57,7 @@
         /// <returns>The formated string.</returns>
         public static string Invariant(string format, object arg0, object arg1, object arg2)
         {
-            Check.NotEmpty(format, "format");
+            Check.NotEmpty(format, nameof(format));
 
             return string.Format(CultureInfo.InvariantCulture, format, arg0, arg1, arg2);
         }

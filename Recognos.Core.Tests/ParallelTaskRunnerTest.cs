@@ -7,37 +7,40 @@ using Xunit;
 
 namespace Recognos.Test.Core
 {
-    public class ParalelTaskRunnerTest
+    public class ParallelTaskRunnerTest
     {
-
         [Fact]
-        public void ParalelRunnerTest()
+        public void ParallelRunnerTest()
         {
-            int task = 100;
+            const int task = 100;
             int sum = 0;
 
             using (TaskExecutor runner = new TaskExecutor())
             {
                 object pad = new object();
-                Enumerable.Range(0, task).ToList().ForEach(num =>
+                foreach (var num in Enumerable.Range(0, task))
+                {
                     runner.AddTask(() =>
-                        {
-                            lock (pad) { sum++; }
-                        }));
+                    {
+                        lock (pad) { sum++; }
+                    });
+                }
                 runner.Finish();
             }
             sum.Should().Be(task);
         }
 
         [Fact]
-        public void ParalelRunnerTestTaskCount()
+        public void ParallelRunnerTestTaskCount()
         {
             using (TaskExecutor runner = new TaskExecutor())
             {
+                const int count = 10;
 
-                int count = 10;
-
-                Enumerable.Range(0, count).ToList().ForEach(num => runner.AddTask(() => Thread.Sleep(100)));
+                foreach (var num in Enumerable.Range(0, count))
+                {
+                    runner.AddTask(() => Thread.Sleep(100));
+                }
 
                 runner.TotalAddedTasks.Should().Be(count);
                 runner.RemainingTasks.Should().Be(count);
@@ -60,9 +63,8 @@ namespace Recognos.Test.Core
             }
         }
 
-
         [Fact]
-        public void ParalelRunnerFlushTasksTest()
+        public void ParallelRunnerFlushTasksTest()
         {
             for (int count = 0; count < 20; count++)
             {
@@ -71,7 +73,8 @@ namespace Recognos.Test.Core
                     int i = 0;
                     double r;
 
-                    Enumerable.Range(0, count).ToList().ForEach(num =>
+                    foreach (var num in Enumerable.Range(0, count))
+                    {
                         runner.AddTask(() =>
                         {
                             for (int j = 0; j < 1000; j++)
@@ -79,7 +82,8 @@ namespace Recognos.Test.Core
                                 r = Math.Sin(0.234234) * Math.Atan(j);
                             }
                             Interlocked.Increment(ref i);
-                        }));
+                        });
+                    }
 
                     (i <= count).Should().BeTrue();
 
@@ -95,21 +99,24 @@ namespace Recognos.Test.Core
         }
 
         [Fact]
-        public void ParalelRunnerFlushTest10Threads()
+        public void ParallelRunnerFlushTest10Threads()
         {
             using (TaskExecutor runner = new TaskExecutor(10))
             {
 
                 int i = 0;
 
-                Enumerable.Range(0, 10).ToList().ForEach(n =>
+                foreach (var n in Enumerable.Range(0, 10))
+                {
                     runner.AddTask(() =>
                     {
                         if (n % 2 == 0)
+                        {
                             Thread.SpinWait(int.MaxValue / 200);
+                        }
                         Interlocked.Increment(ref i);
-                    })
-                );
+                    });
+                }
 
                 (i <= 10).Should().BeTrue();
 
@@ -124,23 +131,25 @@ namespace Recognos.Test.Core
         }
 
         [Fact]
-        public void ParalelRunnerFlushTestAutoThreads()
+        public void ParallelRunnerFlushTestAutoThreads()
         {
             using (TaskExecutor runner = new TaskExecutor())
             {
-
                 int i = 0;
 
-                int count = 10;
+                const int count = 10;
 
-                Enumerable.Range(0, count).ToList().ForEach(n =>
+                foreach (var n in Enumerable.Range(0, count))
+                {
                     runner.AddTask(() =>
                     {
                         if (n % 2 == 0)
+                        {
                             Thread.SpinWait(int.MaxValue / 200);
+                        }
                         Interlocked.Increment(ref i);
-                    })
-                );
+                    });
+                }
 
                 (i <= count).Should().BeTrue();
 
@@ -155,21 +164,23 @@ namespace Recognos.Test.Core
         }
 
         [Fact]
-        public void ParalelRunnerFlushTestThreadSleep()
+        public void ParallelRunnerFlushTestThreadSleep()
         {
             using (TaskExecutor runner = new TaskExecutor())
             {
-
                 int i = 0;
 
-                Enumerable.Range(0, 10).ToList().ForEach(n =>
+                foreach (var n in Enumerable.Range(0, 10))
+                {
                     runner.AddTask(() =>
                     {
                         if (n % 2 == 0)
+                        {
                             Thread.Sleep(100);
+                        }
                         Interlocked.Increment(ref i);
-                    })
-                );
+                    });
+                }
 
                 (i <= 10).Should().BeTrue();
 
@@ -183,13 +194,11 @@ namespace Recognos.Test.Core
             }
         }
 
-
         [Fact]
-        public void ParalelRunnerExceptionTest()
+        public void ParallelRunnerExceptionTest()
         {
             using (TaskExecutor runner = new TaskExecutor())
             {
-
                 InvalidOperationException x = new InvalidOperationException();
 
                 runner.AddTask(() => { throw x; });
@@ -210,7 +219,7 @@ namespace Recognos.Test.Core
         }
 
         [Fact]
-        public void ParalelRunnerHandeledExceptionTest()
+        public void ParallelRunnerHandeledExceptionTest()
         {
             using (TaskExecutor runner = new TaskExecutor())
             {
@@ -220,12 +229,14 @@ namespace Recognos.Test.Core
 
                 runner.AddTask(() => { throw x; });
 
-                Assert.DoesNotThrow(() => runner.Finish());
+                Action action = () => runner.Finish();
+
+                action.ShouldNotThrow();
             }
         }
 
         [Fact]
-        public void ParalelRunnerStressTest()
+        public void ParallelRunnerStressTest()
         {
             // 1000 increments with 2ms sleep each on 2 threads
             // 1000 * 2ms / 2threads = 1000ms min wait

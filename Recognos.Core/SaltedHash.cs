@@ -29,8 +29,8 @@ namespace Recognos.Core
         /// <param name="saltLength">Length of the salt.</param>
         public SaltedHash(HashAlgorithm hashAlgorithm, int saltLength)
         {
-            Check.NotNull(hashAlgorithm, "hashAlgorithm");
-            Check.Positive(saltLength, "saltLength");
+            Check.NotNull(hashAlgorithm, nameof(hashAlgorithm));
+            Check.Positive(saltLength, nameof(saltLength));
             this.hashAlgorithm = hashAlgorithm;
             this.saltLength = saltLength;
         }
@@ -81,7 +81,7 @@ namespace Recognos.Core
         [Obsolete("New hashes should be generated using PBKDF2SaltedHash.GenerateHash()")]
         public string GenerateHash(string password)
         {
-            Check.NotNull(password, "password");
+            Check.NotNull(password, nameof(password));
             byte[] pass = Encoding.UTF8.GetBytes(password);
             byte[] salt = GenerateSalt();
             byte[] hash = ComputeHash(pass, salt);
@@ -96,8 +96,8 @@ namespace Recognos.Core
         /// <returns>True if the hash matches the hashed password.</returns>
         public bool VerifyHash(string password, string hash)
         {
-            Check.NotNull(password, "password");
-            Check.NotEmpty(hash, "hash");
+            Check.NotNull(password, nameof(password));
+            Check.NotEmpty(hash, nameof(hash));
 
             if (PBKDF2SaltedHash.IsPBKDF2Hash(hash))
             {

@@ -4,12 +4,11 @@ using Xunit;
 
 namespace Recognos.Test.Core
 {
-
     public class SaltedHashTests
     {
-        private string password = "test";
-        private string good = "test";
-        private string bad = "bad";
+        private const string password = "test";
+        private const string good = "test";
+        private const string bad = "bad";
 
         [Fact]
         public void SaltedHash_CanCreateHash()

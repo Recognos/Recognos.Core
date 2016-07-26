@@ -58,8 +58,8 @@
         /// <param name="output">The output.</param>
         public static void UUDecode(System.IO.Stream input, System.IO.Stream output)
         {
-            Check.NotNull(input, "input");
-            Check.NotNull(output, "output");
+            Check.NotNull(input, nameof(input));
+            Check.NotNull(output, nameof(output));
 
             long len = input.Length;
             if (len == 0)
@@ -132,8 +132,8 @@
         /// <param name="output">The output.</param>
         public static void UUEncode(System.IO.Stream input, System.IO.Stream output)
         {
-            Check.NotNull(input, "input");
-            Check.NotNull(output, "output");
+            Check.NotNull(input, nameof(input));
+            Check.NotNull(output, nameof(output));
 
             long len = input.Length;
             if (len == 0)

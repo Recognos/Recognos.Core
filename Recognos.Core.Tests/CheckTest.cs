@@ -23,21 +23,23 @@
         [Fact]
         public void PositiveTest3()
         {
-            Assert.DoesNotThrow(() =>
+            Action action = () =>
             {
                 Check.Positive(0, "x");
                 Check.Positive(int.MaxValue, "x");
-            });
+            };
+            action.ShouldNotThrow();
         }
 
         [Fact]
         public void PositiveTest4()
         {
-            Assert.DoesNotThrow(() =>
+            Action action = () =>
             {
                 Check.Positive(0m, "x");
                 Check.Positive(decimal.MaxValue, "x");
-            });
+            };
+            action.ShouldNotThrow();
         }
 
         [Fact]
@@ -73,22 +75,23 @@
         [Fact]
         public void AbsolutePositiveTest4()
         {
-            Assert.DoesNotThrow(() =>
+            Action action = () =>
             {
                 Check.AbsolutePositive(1, "x");
                 Check.AbsolutePositive(int.MaxValue, "x");
-            });
+            };
+            action.ShouldNotThrow();
         }
 
         [Fact]
         public void AbsolutePositiveTest5()
         {
-            Assert.DoesNotThrow(() =>
+            Action action = () =>
             {
-                decimal value = 1;
-                Check.AbsolutePositive(value, "x");
+                Check.AbsolutePositive(1m, "x");
                 Check.AbsolutePositive(decimal.MaxValue, "x");
-            });
+            };
+            action.ShouldNotThrow();
         }
 
         [Fact]
@@ -112,11 +115,12 @@
         [Fact]
         public void NotNullTest1()
         {
-            Assert.DoesNotThrow(() =>
+            Action action = () =>
             {
                 Check.NotNull(new object(), "x");
                 Check.NotNull(string.Empty, "x");
-            });
+            };
+            action.ShouldNotThrow();
         }
 
         [Fact]
@@ -134,10 +138,11 @@
         [Fact]
         public void NotEmptyStringTest4()
         {
-            Assert.DoesNotThrow(() =>
+            Action action = () =>
             {
                 Check.NotEmpty("x", "x");
-            });
+            };
+            action.ShouldNotThrow();
         }
 
         [Fact]
@@ -155,10 +160,11 @@
         [Fact]
         public void NotEmptyCollectionTest4()
         {
-            Assert.DoesNotThrow(() =>
+            Action action = () =>
             {
                 Check.NotEmpty(new object[] { new object() }, "x");
-            });
+            };
+            action.ShouldNotThrow();
         }
 
         [Fact]
@@ -170,10 +176,11 @@
         [Fact]
         public void ConditionTest5()
         {
-            Assert.DoesNotThrow(() =>
+            Action action = () =>
             {
                 Check.Condition(true, "asd");
-            });
+            };
+            action.ShouldNotThrow();
         }
 
         #region Helper classes for checking injected members
@@ -244,19 +251,21 @@
         public void CheckInjectionTest1()
         {
             InjectionTest test = new InjectionTest(new ConcreteMember());
-            Assert.DoesNotThrow(() =>
+            Action action = () =>
             {
                 Check.InjectedMembers(test);
-            });
+            };
+            action.ShouldNotThrow();
         }
 
         [Fact]
         public void Check_InjectedMembers_TestBaseClass()
         {
-            Assert.DoesNotThrow(() =>
+            Action action = () =>
             {
                 new ConcreteTest(new ConcreteMember());
-            });
+            };
+            action.ShouldNotThrow();
         }
 
         [Fact]

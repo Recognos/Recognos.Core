@@ -64,8 +64,8 @@
         /// <param name="interval">The interval.</param>
         public SimpleScheduler(Action task, string timeToRunTask, TimeSpan interval)
         {
-            Check.NotNull(task, "task");
-            Check.NotEmpty(timeToRunTask, "timeToRunTask");
+            Check.NotNull(task, nameof(task));
+            Check.NotEmpty(timeToRunTask, nameof(timeToRunTask));
 
             this.disabled = DisablingValues.Any(v => v.CaseInsensitiveEquals(timeToRunTask));
 

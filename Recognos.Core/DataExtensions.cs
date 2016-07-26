@@ -133,7 +133,7 @@
         /// <returns>The hexadecimal representation of the data as a string</returns>
         public static string ToHexa(this byte[] data)
         {
-            Check.NotNull(data, "data");
+            Check.NotNull(data, nameof(data));
             return data.Aggregate(
                 new StringBuilder(32),
                 (sb, bit) => sb.Append(bit.ToString("X2", CultureInfo.InvariantCulture))
@@ -149,7 +149,7 @@
         [DebuggerStepThrough]
         public static T ToEnum<T>(this int value)
         {
-            Check.Positive(value, "value");
+            Check.Positive(value, nameof(value));
             Type enumType = typeof(T);
             Check.Condition(enumType.IsEnum, "The type must be an enumeration");
             return (T)Enum.ToObject(enumType, value);
@@ -172,7 +172,7 @@
         /// <returns>Human readable file size.</returns>
         public static string ToFileSize(this long size)
         {
-            Check.Positive(size, "size");
+            Check.Positive(size, nameof(size));
 
             const int ByteConversion = 1024;
             double bytes = Convert.ToDouble(size);

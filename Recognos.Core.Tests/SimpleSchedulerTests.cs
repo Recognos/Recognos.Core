@@ -5,7 +5,6 @@ using Xunit;
 
 namespace Recognos.Test.Core
 {
-
     public class SimpleSchedulerTests
     {
         [Fact]
@@ -16,7 +15,6 @@ namespace Recognos.Test.Core
             // time to call the action
             TimeSpan time = DateTime.Now.TimeOfDay.Add(TimeSpan.FromSeconds(1));
             string nextSecond = time.ToString(@"hh\:mm\:ss", System.Globalization.CultureInfo.InvariantCulture);
-
 
             using (SimpleScheduler scheduler = new SimpleScheduler(() => wasCalled = true, nextSecond))
             {

@@ -1041,21 +1041,24 @@
                 return 0;
             }
 
+            var upperBound0 = first.Length;
+            var upperBound1 = second.Length;
+
             int[,] d = new int[first.Length + 1, second.Length + 1];
 
-            for (int i = 0; i <= d.GetUpperBound(0); i += 1)
+            for (int i = 0; i <= upperBound0; i += 1)
             {
                 d[i, 0] = i;
             }
 
-            for (int i = 0; i <= d.GetUpperBound(1); i += 1)
+            for (int i = 0; i <= upperBound1; i += 1)
             {
                 d[0, i] = i;
             }
 
-            for (int i = 1; i <= d.GetUpperBound(0); i += 1)
+            for (int i = 1; i <= upperBound0; i += 1)
             {
-                for (int j = 1; j <= d.GetUpperBound(1); j += 1)
+                for (int j = 1; j <= upperBound1; j += 1)
                 {
                     var cost = Convert.ToInt32(first[i - 1] != second[j - 1]);
 
@@ -1066,7 +1069,7 @@
                 }
             }
 
-            return d[d.GetUpperBound(0), d.GetUpperBound(1)];
+            return d[upperBound0, upperBound1];
         }
     }
 }

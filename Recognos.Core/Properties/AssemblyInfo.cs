@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Recognos Romania")]
 [assembly: AssemblyProduct("Recognos Core Libraries")]
-[assembly: AssemblyCopyright("Copyright © Recognos Romania 2014")]
+[assembly: AssemblyCopyright("Copyright © Recognos Romania 2018")]
 [assembly: AssemblyTrademark("Recognos Core Libraries")]
 [assembly: AssemblyCulture("")]
 
@@ -14,8 +14,8 @@ using System.Runtime.InteropServices;
 
 [assembly: CLSCompliant(true)]
 
-[assembly: AssemblyVersion("2.0.7.0")]
-[assembly: AssemblyFileVersion("2.0.7.0")]
+[assembly: AssemblyVersion("2.0.8.0")]
+[assembly: AssemblyFileVersion("2.0.8.0")]
 
 
 [module: SuppressMessage("Microsoft.Design", "CA2210:AssembliesShouldHaveValidStrongNames", Justification = "No f`ing way")]

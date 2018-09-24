@@ -6,6 +6,7 @@
 				<title>Recognos Core Libraries</title>
 				<authors>Recognos Romania</authors>
 				<owners>Recognos</owners>
+				<licenseUrl>https://github.com/Recognos/Recognos.Core/blob/master/LICENSE</licenseUrl>
 				<projectUrl>https://github.com/Recognos/Recognos.Core</projectUrl>
 				<requireLicenseAcceptance>false</requireLicenseAcceptance>
 				<description>Collection of common utilities &amp; extension methods, optimized &amp; tested. Recommended for all C# projects.</description>
